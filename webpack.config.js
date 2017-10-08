@@ -13,13 +13,15 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports ={
 	entry:'./client/index.js', //entry file where the bundler starts the bundling process.
 	output: { //location where the bundled Javascript code is to be saved.
-		path: path.resolve('dist'),
+		path: __dirname +'/dist',
 		filename: 'index_bundle.js',
 	},
 
 	module: {
 		loaders:[ //To interprate JSX, JS; transformations that are applied on a file in our app. 
-			{test:/\.js$/, loader: 'babel-loader', exclude: /node_modules/},
+			{
+				test:/\.js$/, loader: 'babel-loader', exclude: /node_modules/
+			},
 			{
 				test:/\.jsx$/, loader: 'babel-loader', exclude: /node_modules/
 			},
@@ -28,4 +30,3 @@ module.exports ={
 
 	plugins: [HtmlWebpackPluginConfig]
 };
-

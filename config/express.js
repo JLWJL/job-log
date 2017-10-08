@@ -2,6 +2,7 @@
 
 const express = require('express');
 const bodyPaser = require('body-parser');
+const jobRoutes = require('../api/routes/jobRoutes');
 
 module.exports = function(){
 	const app = express();
@@ -17,9 +18,7 @@ module.exports = function(){
 	//
 	// Routes
 	//
-	app.use('/', (req, res)=>{
-		res.send("running");	
-	});
+	app.use('/job',jobRoutes)
 
 
 	return app;
