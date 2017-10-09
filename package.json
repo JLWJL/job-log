@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "nodemon app.js",
-    "build": "webpack",
+    "build": "webpack --watch",
     "babel": "babel app.js -d dist/svr && babel ./client/components/App.js -d dist/svr "
   },
   "devDependencies": {
