@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SingleJob from './SingleJob';
+import JobsOverview from './JobsOverview';
 
 export default class App extends React.Component{
 	render(){
 		return(
-			<SingleJob/>
+			<JobsOverview/>
 		);
 	}
 }
