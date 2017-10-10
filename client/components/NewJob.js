@@ -24,15 +24,18 @@ export default class NewJob extends React.Component{
 				<form action="http://localhost:3000/job" method="POST">
 				  <div className="form-group">
 				    <label htmlFor="jobTitle">Title</label>
-				    <input type="text" name="jobTitle" className="form-control" id="jobTitle" placeholder="Job title"/>
+				    <input type="text" name="jobTitle" className="form-control" id="jobTitle" placeholder="Job title" required/>
+				    <div class="invalid-feedback">
+				      Please provide a valid city.
+				    </div>
 				  </div>
 				  <div className="form-group">
 				    <label htmlFor="companyName">Company</label>
-				    <input type="text" name="companyName" className="form-control" id="companyName" placeholder="Company name"/>
+				    <input type="text" name="companyName" className="form-control" id="companyName" placeholder="Company name" required/>
 				  </div>
 				  <div className="form-group">
 				    <label htmlFor="jobLocation">Location</label>
-				    <input type="text" name="jobLocation" className="form-control" id="jobLocation" placeholder="Location"/>
+				    <input type="text" name="jobLocation" className="form-control" id="jobLocation" placeholder="Location" required/>
 				  </div>
 				  <div className="form-group">
 				    <label htmlFor="jobContact">Contact</label>

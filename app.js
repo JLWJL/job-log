@@ -10,6 +10,7 @@ const app = express();
 
 
 app.use((req,res,next)=>{
+	console.log("Invalid URL");
 	res.send("Page not found");
 });
 

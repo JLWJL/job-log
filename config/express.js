@@ -26,5 +26,10 @@ module.exports = function(){
 	app.use('/job',jobRoutes)
 
 
+	app.use('/*', (req,res)=>{
+		console.log("Typed url handled");
+		res.sendFile(__dirname+'dist/index.html');
+	});
+
 	return app;
 }
