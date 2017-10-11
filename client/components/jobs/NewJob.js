@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 export default class NewJob extends React.Component{
 	
 	constructor(){
@@ -25,7 +23,7 @@ export default class NewJob extends React.Component{
 				  <div className="form-group">
 				    <label htmlFor="jobTitle">Title</label>
 				    <input type="text" name="jobTitle" className="form-control" id="jobTitle" placeholder="Job title" required/>
-				    <div class="invalid-feedback">
+				    <div className="invalid-feedback">
 				      Please provide a valid city.
 				    </div>
 				  </div>

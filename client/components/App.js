@@ -1,8 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// require('bootstrap/dist/css/bootstrap.css');
-import JobsOverview from './JobsOverview';
-import NewJob from './NewJob';
 import Header from './Header'
 import Main from './Main';
 

@@ -15,6 +15,7 @@ module.exports ={
 	output: { //location where the bundled Javascript code is to be saved.
 		path: __dirname +'/dist',
 		filename: 'index_bundle.js',
+		
 	},
 
 	module: {

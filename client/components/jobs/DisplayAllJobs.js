@@ -1,6 +1,7 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
-export default class JobsOverview extends React.Component {
+export default class DisplayAllJobs extends React.Component {
 	
 	constructor(){
 		super();
@@ -41,28 +42,27 @@ export default class JobsOverview extends React.Component {
 		})
 
 		return(
-			<table className="table">
-			  <thead>
-			    <tr>
-			      <th>#</th>
-			      <th>Job Title</th>
-			      <th>Company</th>
-			      <th>Location</th>
-			      <th>Expire</th>
-			      <th>Contact</th>
-			      <th>Description</th>
-			      <th>Other</th>
-			      <th>Status</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    {jobsList}
-			  </tbody>
-			</table>
+			<div className="jobs-table">
+				<table className="table">
+				  <thead>
+				    <tr>
+				      <th>#</th>
+				      <th>Job Title</th>
+				      <th>Company</th>
+				      <th>Location</th>
+				      <th>Expire</th>
+				      <th>Contact</th>
+				      <th>Description</th>
+				      <th>Other</th>
+				      <th>Status</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    {jobsList}
+				  </tbody>
+				</table>
+				<Link to="/jobs/new-job" className="btn btn-primary">New Job</Link>
+			</div>
 		)
 	}
 }
-
-	// componentDidMount(){
-		
-	// }

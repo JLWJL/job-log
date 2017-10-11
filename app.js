@@ -11,9 +11,8 @@ const app = express();
 
 app.use((req,res,next)=>{
 	console.log("Invalid URL");
-	res.send("Page not found");
+	res.json("Page not found");
 });
-
 
 db.connect((err)=>{
 	if(err){
