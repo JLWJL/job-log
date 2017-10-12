@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 
 export default class NewJob extends React.Component{
 	
@@ -61,11 +62,22 @@ export default class NewJob extends React.Component{
 		}
 		
 		fetch('http://localhost:3000/job', init)
-		.then(res=>{return res.json()})
-		.then(data=>{
-			console.log("Data: ", data);
-
-		});		
+		.then(res=>{
+			if(res.ok){
+				this.setState({
+					isCreated:true
+				});
+				alert("Job application created");
+			}
+			else{
+				let error = new Error(res.statusText);
+				error.res = res
+				throw error;
+			}
+		})
+		.catch(err=>{
+			alert(err);
+		})
 	}
 
 
@@ -107,11 +119,14 @@ export default class NewJob extends React.Component{
 				  <button type="submit" className="btn btn-primary">OK</button>
 				  <button type="button" className="btn btn-danger">Cancel</button>
 				</form>
+
+				{this.state.isCreated && (
+
+				  <Redirect to='/'/>
+				)}
 			</div>
 		);
 	}
-
-
 }
 	
 
