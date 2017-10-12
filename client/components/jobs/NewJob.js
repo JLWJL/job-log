@@ -6,13 +6,13 @@ export default class NewJob extends React.Component{
 		super();
 		this.state={
 			isCreated:false,
-			jobTitle:"",
-			companyName:"",
-			jobLocation:"",
-			jobContact:"",
-			expire:"",
-			jobDesc:"",
-			jobOthers:""
+			title:"",
+			company:"",
+			location:"",
+			contact:"",
+			expire:'',
+			description:"",
+			other:""
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,7 +33,39 @@ export default class NewJob extends React.Component{
 	}
 
 	handleSubmit(event){
+		event.preventDefault();
 
+		//Collect data
+		let form = document.getElementById('new-job-form');		
+		const formData = new FormData(form); //multipart/form-data format
+
+		//Convert to json format
+		let jsonFormData = {};
+		for (var entry of formData.entries())
+    {
+        jsonFormData[entry[0]] = entry[1];
+    }
+    jsonFormData = JSON.stringify(jsonFormData);
+
+	
+		//Validate data
+
+		//Post data
+		let init={
+			method:'POST',
+			body:jsonFormData,
+			headers:{
+				"Content-Type":"application/json",// body-parser needs this to work
+				'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+			}
+		}
+		
+		fetch('http://localhost:3000/job', init)
+		.then(res=>{return res.json()})
+		.then(data=>{
+			console.log("Data: ", data);
+
+		});		
 	}
 
 
@@ -42,34 +74,34 @@ export default class NewJob extends React.Component{
 			<div>
 				<h2>New Job</h2>
 				<hr/>
-				<form action="http://localhost:3000/job" method="POST">
+				<form id="new-job-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
 				  <div className="form-group">
-				    <label htmlFor="jobTitle">Title</label>
-				    <input type="text" name="jobTitle" className="form-control" id="jobTitle" placeholder="Job title" onChange={this.handleChange} value={this.state.jobTitle} required/>
+				    <label htmlFor="title">Title</label>
+				    <input type="text" name="title" className="form-control" id="title" placeholder="Job title" onChange={this.handleChange} value={this.state.title} required/>
 				  </div>
 				  <div className="form-group">
-				    <label htmlFor="companyName">Company</label>
-				    <input type="text" name="companyName" className="form-control" id="companyName" placeholder="Company name" onChange={this.handleChange} value={this.state.companyName} required/>
+				    <label htmlFor="company">Company</label>
+				    <input type="text" name="company" className="form-control" id="company" placeholder="Company name" onChange={this.handleChange} value={this.state.company} required/>
 				  </div>
 				  <div className="form-group">
-				    <label htmlFor="jobLocation">Location</label>
-				    <input type="text" name="jobLocation" className="form-control" id="jobLocation" placeholder="Location" onChange={this.handleChange} value={this.state.jobLocation} required/>
+				    <label htmlFor="location">Location</label>
+				    <input type="text" name="location" className="form-control" id="location" placeholder="Location" onChange={this.handleChange} value={this.state.location} required/>
 				  </div>
 				  <div className="form-group">
-				    <label htmlFor="jobContact">Contact</label>
-				    <input type="text" name="jobContact" className="form-control" id="jobContact" onChange={this.handleChange} value={this.state.jobContact}/>
+				    <label htmlFor="contact">Contact</label>
+				    <input type="text" name="contact" className="form-control" id="contact" onChange={this.handleChange} value={this.state.contact}/>
 				  </div>
 				  <div className="form-group">
 				    <label htmlFor="expire">Expire date</label>
-				    <input type="text" name="expire" className="form-control" id="expire" placeholder="yyyy/mm/dd" onChange={this.handleDate} value={this.state.expire}/>
+				    <input type="text" name="expire" className="form-control" id="expire" placeholder="yyyy/mm/dd" onChange={this.handleChange} value={this.state.expire}/>
 				  </div>
 				  <div className="form-group">
-				    <label htmlFor="jobDesc">Description</label>
-				    <textarea name="jobDesc" className="form-control" id="jobDesc" cols="30" rows="10" onChange={this.handleChange} value={this.state.jobDesc}></textarea>
+				    <label htmlFor="description">Description</label>
+				    <textarea name="description" className="form-control" id="description" cols="30" rows="10" onChange={this.handleChange} value={this.state.description}></textarea>
 				  </div>
 				  <div className="form-group">
-				    <label htmlFor="jobOthers">Others</label>
-				    <textarea name="jobOthers" className="form-control" id="jobOthers" cols="30" rows="10" onChange={this.handleChange} value={this.state.jobOthers}></textarea>
+				    <label htmlFor="other">Others</label>
+				    <textarea name="other" className="form-control" id="other" cols="30" rows="10" onChange={this.handleChange} value={this.state.other}></textarea>
 				  </div>
 				  
 				  <button type="submit" className="btn btn-primary">OK</button>

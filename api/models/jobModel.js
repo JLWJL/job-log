@@ -26,8 +26,20 @@ function singleJob(values, done){
 }
 
 
+function createJob(values, done){
+	let sql = "INSERT INTO application SET ?";
+	
+	db.getPool().query(sql,[values], (err,results,fields)=>{
+		if(err){
+			return done({"Error": "Create application error: "+err});
+		}
+		return done(results);
+	})
+}
+
 
 module.exports={
 	listJobs: listJobs,
-	singleJob: singleJob
+	singleJob: singleJob,
+	createJob: createJob
 }

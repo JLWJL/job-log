@@ -21,7 +21,19 @@ function singleJob(req,res){
 }
 
 
+function createJob(req, res){
+	console.log(req.body);
+	Job.createJob(req.body, (result)=>{
+		if(result.Error){
+			res.status(400).send(result);
+		}else{
+			res.status(201).json(result);
+		}
+	});
+}
+
 module.exports={
 	ListJobs: listJobs,
-	SingleJob: singleJob
+	SingleJob: singleJob,
+	CreateJob: createJob,
 }

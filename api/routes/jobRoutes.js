@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.route('/')
 	.get(jobController.ListJobs)
+	.post(jobController.CreateJob)
 
 router.route('/:app_id')
 	.get(jobController.SingleJob)
