@@ -10,6 +10,7 @@ router.route('/')
 
 router.route('/:app_id')
 	.get(jobController.SingleJob)
+	.delete(jobController.DeleteJob)
 
 
 module.exports=router;

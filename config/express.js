@@ -28,10 +28,14 @@ module.exports = function(){
 	app.use('/job',jobRoutes)
 
 
-	app.use('/*', (req,res)=>{
-		console.log("Typed url handled");
-		res.sendFile(__dirname+'dist/index.html');
+	//
+	// Error handling
+	//
+	app.use((err,req,res,next)=>{
+		console.log("Error handled: ", err.message)
+		res.status(err.status||400).send(err.message);
 	});
+
 
 	return app;
 }
