@@ -51,6 +51,8 @@ export default class NewJob extends React.Component{
 	
 		//Validate data
 
+
+
 		//Post data
 		let init={
 			method:'POST',

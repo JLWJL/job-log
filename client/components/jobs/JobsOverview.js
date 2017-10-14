@@ -5,11 +5,10 @@ import NewJob from './NewJob';
 import NotFoundPage from '../NotFoundPage';
 
 export default class JobsOverview extends React.Component {
-	render(){
+
+	render(){	
 		return(
 			<Switch>
-				{console.log(`Path: ${this.props.match.path}`)}
-				{console.log(`Url: ${this.props.match.url}`)}
 				<Route exact path="/" component={DisplayAllJobs}></Route>
 				
 				<Route exact path="/jobs" component={DisplayAllJobs}></Route>
@@ -20,7 +19,9 @@ export default class JobsOverview extends React.Component {
 			</Switch>
 		)
 	}
+
 }
+
 
 	// componentDidMount(){
 		
