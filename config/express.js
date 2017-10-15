@@ -2,7 +2,8 @@
 
 const express = require('express');
 const bodyPaser = require('body-parser');
-const jobRoutes = require('../api/routes/jobRoutes');
+const jobRoutes = require('../api/routes/jobRoutes')
+const userRoutes = require('../api/routes/userRoutes');
 
 module.exports = function(){
 	const app = express();
@@ -26,6 +27,7 @@ module.exports = function(){
 	// Routes
 	//
 	app.use('/job',jobRoutes)
+	app.use('/user', userRoutes)
 
 
 	//

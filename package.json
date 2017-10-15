@@ -6,6 +6,7 @@
   "author": "Junlong",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
     "css-loader": "^0.28.7",

@@ -5,6 +5,7 @@ export default class Registration extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
+			email:"",
 			firstName:"",
 			lastName:"",
 			password:"",
@@ -27,6 +28,11 @@ export default class Registration extends React.Component{
 				<h2>Sign Up</h2>
 				<hr/>
 				<form id="user-sign-up" onSubmit={this.handleSubmit} encType="multipart/form-data">
+
+				  <div className="form-group">
+				    <label htmlFor="email">Email</label>
+				    <input type="text" name="email" className="form-control" id="email" placeholder="email" onChange={this.handleChange} value={this.state.email} required/>
+				  </div>
 				  <div className="form-group">
 				    <label htmlFor="firstName">First Name</label>
 				    <input type="text" name="firstName" className="form-control" id="firstName" placeholder="Job firstName" onChange={this.handleChange} value={this.state.firstName} required/>

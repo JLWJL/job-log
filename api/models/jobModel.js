@@ -7,7 +7,7 @@ function listJobs(err, done){
 	db.getPool().query(sql, (err, results, fields)=>{
 		if(err) {
 			return done({
-				"message": err.code,
+				"message": err,
 				"status":500
 			}, results);
 		}
@@ -23,7 +23,7 @@ function singleJob(values, done){
 	db.getPool().query(sql,(err,results,fields)=>{
 		if(err){
 			return done({
-				"message": err.code,
+				"message": err,
 				"status":500
 			}, results);
 		}
@@ -38,7 +38,7 @@ function createJob(values, done){
 	db.getPool().query(sql,[values], (err,results,fields)=>{
 		if(err){
 			return done({
-				"message": err.code,
+				"message": err,
 				"status":500
 			}, results);
 		}
@@ -53,7 +53,7 @@ function deleteJob(values, done){
 	db.getPool().query(sql,[values], (err,results,fields)=>{
 		if(err){
 			return done({
-				"message": err.code,
+				"message": err,
 				"status":500
 			}, results);
 		}
