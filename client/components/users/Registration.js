@@ -48,10 +48,11 @@ export default class Registration extends React.Component{
 			headers: {
 				"Content-Type":"application/json",
 				"Accept": "application/json, application/xml, text/plain, text/html, *.*"
-			}
+			},
+			body:jsonFormData
 		}
 
-		fetch("http:localhost:3000/user/auth/signup", init)
+		fetch("http://localhost:3000/user/auth/signup", init)
 		.then(
 			res=>{
 				if(res.ok){
