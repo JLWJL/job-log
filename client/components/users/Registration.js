@@ -1,15 +1,20 @@
-import React from 'react'
+import React from 'react';
+import {Redirect} from 'react-router-dom';
 
 export default class Registration extends React.Component{
 
 	constructor(props){
 		super(props);
 		this.state={
+			isRegistered:false,
 			email:"",
 			firstName:"",
 			lastName:"",
 			password:"",
 		}
+
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleChange(e){
@@ -19,6 +24,51 @@ export default class Registration extends React.Component{
 		this.setState({
 			[inputName]:inputValue
 		})
+	}
+
+	handleSubmit(e){
+		e.preventDefault();
+
+		let signUpForm = document.getElementById('user-sign-up');
+		let formData = new FormData(signUpForm);
+
+		let jsonFormData = {};
+		for(let d of formData){
+			jsonFormData[d[0]] = d[1];
+		}
+		jsonFormData = JSON.stringify(jsonFormData);
+
+		//Validation
+
+
+
+		//Submit
+		let init={
+			method: 'POST',
+			headers: {
+				"Content-Type":"application/json",
+				"Accept": "application/json, application/xml, text/plain, text/html, *.*"
+			}
+		}
+
+		fetch("http:localhost:3000/user/auth/signup", init)
+		.then(
+			res=>{
+				if(res.ok){
+					this.setState({
+						isRegistered:true
+					});
+					alert("Welcome!");
+				}else{
+					throw new Error(res.statusText);
+				}
+			}
+		)
+		.catch(
+			err=>{
+				alert(err);
+			}
+		)
 	}
 
 	render(){
@@ -50,9 +100,9 @@ export default class Registration extends React.Component{
 				  <button type="button" className="btn btn-danger">Cancel</button>
 				</form>
 
-				{this.state.isCreated && (
+				{this.state.isRegistered && (
 
-				  <Redirect to='/'/>
+				  <Redirect to='/account/login'/>
 				)}
 			</div>
 		);

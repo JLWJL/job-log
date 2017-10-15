@@ -2,7 +2,7 @@
 
 const db = require('../../config/db');
 
-function listJobs(err, done){
+function listJobs(done){
 	let sql = "Select * FROM application"
 	db.getPool().query(sql, (err, results, fields)=>{
 		if(err) {

@@ -42,7 +42,7 @@ export default class NewJob extends React.Component{
 
 		//Convert to json format
 		let jsonFormData = {};
-		for (var entry of formData.entries())
+		for (let entry of formData.entries())
     {
         jsonFormData[entry[0]] = entry[1];
     }
@@ -59,7 +59,7 @@ export default class NewJob extends React.Component{
 			body:jsonFormData,
 			headers:{
 				"Content-Type":"application/json",// body-parser needs this to work
-				'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+				"Accept": "application/json, application/xml, text/plain, text/html, *.*",
 			}
 		}
 		
