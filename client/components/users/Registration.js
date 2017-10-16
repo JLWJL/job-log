@@ -83,29 +83,29 @@ export default class Registration extends React.Component{
 					
 					  <div className="form-group">
 					    <label htmlFor="email">Email</label>
-					    <input type="email" name="email" className="form-control" id="email" placeholder="email" onChange={this.handleChange} value={this.state.email} required/>
+					    <input type="email" name="email" className="form-control" id="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} required/>
 					  </div>
 					  <div className="form-group">
 					    <label htmlFor="firstName">First Name</label>
-					    <input type="text" name="firstName" className="form-control" id="firstName" placeholder="Job firstName" onChange={this.handleChange} value={this.state.firstName} required/>
+					    <input type="text" name="firstName" className="form-control" id="firstName" placeholder="First Name" onChange={this.handleChange} value={this.state.firstName} required/>
 					  </div>
 					  <div className="form-group">
 					    <label htmlFor="lastName">Last Name</label>
-					    <input type="text" name="lastName" className="form-control" id="lastName" placeholder="lastName name" onChange={this.handleChange} value={this.state.lastName} required/>
+					    <input type="text" name="lastName" className="form-control" id="lastName" placeholder="Last name" onChange={this.handleChange} value={this.state.lastName} required/>
 					  </div>
 					  <div className="form-group">
 					    <label htmlFor="password">Password</label>
-					    <input type="password" name="password" className="form-control" id="password" placeholder="password" onChange={this.handleChange} value={this.state.password} required/>
+					    <input type="password" name="password" className="form-control" id="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} required/>
 					  </div>
 					  
-					  <button type="submit" className="btn btn-primary">Sign up</button>
-					  <button type="button" className="btn btn-danger">Cancel</button>
+					  <button type="submit" className="btn btn-primary btn-block">Sign up</button>
 					</form>
 					
 					{this.state.isRegistered && (
 					
 					  <Redirect to='/account/login'/>
-					)}</div>
+					)}
+				</div>
 			</div>
 		);
 	}

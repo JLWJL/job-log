@@ -1,9 +1,29 @@
+/***
+* Global
+***/
+.link-block{
+	display:block;
+}
+
+.left{
+	float:left;
+}
+
+.right{
+	float:right;
+}
+
+
+/***
+* Registration and login form 
+****/
+
 .form-container{
 	display:flex;
 	justify-content:center;
 }
 
-.form-signup{
+.form-signup, .form-login{
 	box-shadow: 0px 0px 5px grey;
 	border-radius:5px;
 	flex-basis:60%;
@@ -11,3 +31,4 @@
 	min-width: 225px;
 	max-width:400px;
 }
+
