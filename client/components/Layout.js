@@ -30,20 +30,20 @@ export default class Layout extends React.Component{
 			return(
 				<div className="app container">
 					<header>
-						<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-						  <a class="navbar-brand" href="#">Logo</a>
-						  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-						    <span class="navbar-toggler-icon"></span>
+						<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+						  <a className="navbar-brand" href="#">Logo</a>
+						  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+						    <span className="navbar-toggler-icon"></span>
 						  </button>
-						  <div class="collapse navbar-collapse" id="navbarText">
-						    <ul class="navbar-nav mr-auto">
-						      <li class="nav-item">
+						  <div className="collapse navbar-collapse" id="navbarText">
+						    <ul className="navbar-nav mr-auto">
+						      <li className="nav-item">
 						      	<NavLink to='/jobs' className="nav-link">Your jobs</NavLink>
 						      </li>
-						      <li class="nav-item">
+						      <li className="nav-item">
 										<NavLink to='/account' className="nav-link">Account</NavLink>
 						      </li>
-						      <li class="nav-item">
+						      <li className="nav-item">
 										<NavLink to='/help' className="nav-link">Help</NavLink>
 						      </li>
 						    </ul>
