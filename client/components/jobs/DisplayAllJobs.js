@@ -28,7 +28,7 @@ export default class DisplayAllJobs extends React.Component {
 		const jobsList = this.state.jobs.map((job,i)=>{
 			return(
 				<tr key={i}>
-		      <th scope="row">{i+1}</th>
+		      <th scope="row">{job.app_id}</th>
 		      <td>{job.title}</td>
 		      <td>{job.company}</td>
 		      <td>{job.location}</td>

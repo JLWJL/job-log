@@ -28,19 +28,27 @@ export default class Layout extends React.Component{
 	render(){
 		
 			return(
-				<div className="app">
+				<div className="app container">
 					<header>
-						<ul className="nav">
-							<li className="nav-item">
-								<NavLink to='/jobs' className="nav-link">Your jobs</NavLink>
-							</li>
-							<li className="nav-item">
-								<NavLink to='/account' className="nav-link">Account</NavLink>
-							</li>
-							<li className="nav-item">
-								<NavLink to='/help' className="nav-link">Help</NavLink>
-							</li>
-						</ul>
+						<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+						  <a class="navbar-brand" href="#">Logo</a>
+						  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+						    <span class="navbar-toggler-icon"></span>
+						  </button>
+						  <div class="collapse navbar-collapse" id="navbarText">
+						    <ul class="navbar-nav mr-auto">
+						      <li class="nav-item">
+						      	<NavLink to='/jobs' className="nav-link">Your jobs</NavLink>
+						      </li>
+						      <li class="nav-item">
+										<NavLink to='/account' className="nav-link">Account</NavLink>
+						      </li>
+						      <li class="nav-item">
+										<NavLink to='/help' className="nav-link">Help</NavLink>
+						      </li>
+						    </ul>
+						  </div>
+						</nav>
 					</header>
 
 					<main className="app-content">

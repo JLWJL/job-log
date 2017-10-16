@@ -82,7 +82,7 @@ export default class Registration extends React.Component{
 
 				  <div className="form-group">
 				    <label htmlFor="email">Email</label>
-				    <input type="text" name="email" className="form-control" id="email" placeholder="email" onChange={this.handleChange} value={this.state.email} required/>
+				    <input type="email" name="email" className="form-control" id="email" placeholder="email" onChange={this.handleChange} value={this.state.email} required/>
 				  </div>
 				  <div className="form-group">
 				    <label htmlFor="firstName">First Name</label>
@@ -94,7 +94,7 @@ export default class Registration extends React.Component{
 				  </div>
 				  <div className="form-group">
 				    <label htmlFor="password">Password</label>
-				    <input type="text" name="password" className="form-control" id="password" placeholder="password" onChange={this.handleChange} value={this.state.password} required/>
+				    <input type="password" name="password" className="form-control" id="password" placeholder="password" onChange={this.handleChange} value={this.state.password} required/>
 				  </div>
 				  
 				  <button type="submit" className="btn btn-primary">Sign up</button>
