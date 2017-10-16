@@ -7,6 +7,7 @@ import {Router, browserHistory} from 'react-router';
 // Components
 import ClientRoutes from './components/routes.js';
 import Layout from './components/Layout';
+import "./style.css";
 
 ReactDOM.render((
 	

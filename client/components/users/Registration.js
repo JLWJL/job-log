@@ -75,36 +75,37 @@ export default class Registration extends React.Component{
 	render(){
 		return(
 
-			<div>
-				<h2>Sign Up</h2>
-				<hr/>
-				<form id="user-sign-up" onSubmit={this.handleSubmit} encType="multipart/form-data">
-
-				  <div className="form-group">
-				    <label htmlFor="email">Email</label>
-				    <input type="text" name="email" className="form-control" id="email" placeholder="email" onChange={this.handleChange} value={this.state.email} required/>
-				  </div>
-				  <div className="form-group">
-				    <label htmlFor="firstName">First Name</label>
-				    <input type="text" name="firstName" className="form-control" id="firstName" placeholder="Job firstName" onChange={this.handleChange} value={this.state.firstName} required/>
-				  </div>
-				  <div className="form-group">
-				    <label htmlFor="lastName">Last Name</label>
-				    <input type="text" name="lastName" className="form-control" id="lastName" placeholder="lastName name" onChange={this.handleChange} value={this.state.lastName} required/>
-				  </div>
-				  <div className="form-group">
-				    <label htmlFor="password">Password</label>
-				    <input type="text" name="password" className="form-control" id="password" placeholder="password" onChange={this.handleChange} value={this.state.password} required/>
-				  </div>
-				  
-				  <button type="submit" className="btn btn-primary">Sign up</button>
-				  <button type="button" className="btn btn-danger">Cancel</button>
-				</form>
-
-				{this.state.isRegistered && (
-
-				  <Redirect to='/account/login'/>
-				)}
+			<div className="form-container">
+				<div className="form-signup">
+					<h2>Sign Up</h2>
+					<hr/>
+					<form id="user-sign-up" onSubmit={this.handleSubmit} encType="multipart/form-data">
+					
+					  <div className="form-group">
+					    <label htmlFor="email">Email</label>
+					    <input type="email" name="email" className="form-control" id="email" placeholder="email" onChange={this.handleChange} value={this.state.email} required/>
+					  </div>
+					  <div className="form-group">
+					    <label htmlFor="firstName">First Name</label>
+					    <input type="text" name="firstName" className="form-control" id="firstName" placeholder="Job firstName" onChange={this.handleChange} value={this.state.firstName} required/>
+					  </div>
+					  <div className="form-group">
+					    <label htmlFor="lastName">Last Name</label>
+					    <input type="text" name="lastName" className="form-control" id="lastName" placeholder="lastName name" onChange={this.handleChange} value={this.state.lastName} required/>
+					  </div>
+					  <div className="form-group">
+					    <label htmlFor="password">Password</label>
+					    <input type="password" name="password" className="form-control" id="password" placeholder="password" onChange={this.handleChange} value={this.state.password} required/>
+					  </div>
+					  
+					  <button type="submit" className="btn btn-primary">Sign up</button>
+					  <button type="button" className="btn btn-danger">Cancel</button>
+					</form>
+					
+					{this.state.isRegistered && (
+					
+					  <Redirect to='/account/login'/>
+					)}</div>
 			</div>
 		);
 	}
