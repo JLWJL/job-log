@@ -28,7 +28,7 @@ export default class Layout extends React.Component{
 	render(){
 		
 			return(
-				<div className="app container">
+				<div className="app">
 					<header>
 						<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 						  <a className="navbar-brand" href="#">Logo</a>
