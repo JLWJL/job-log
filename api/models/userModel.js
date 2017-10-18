@@ -8,6 +8,7 @@ function signUp(values, done){
 	let first_name = values.firstName;
 	let last_name = values.lastName;
 	let email = values.email;
+	let password = values.password
 	
 	//Encrypt password with Bcrypt
 	bcrypt.genSalt(2)
@@ -33,9 +34,58 @@ function signUp(values, done){
 		}
 	)
 	.catch((err)=>{
-		console.log("Bcrypt error ", err)
+		console.log("Bcrypt hashing password error ", err)
+		done({
+			"message": err,
+			"status":500
+		}, null)
 	});
+}
 
+
+function login(values, done){
+	let email = values.email,
+			password = values.password;
+	console.log("email is ", email)
+
+	if(!email || !password){
+		res.status(400).send({"message":"Invalid credentials"});
+	}else{
+		db.getPool().query("SELECT * FROM user WHERE email=?", [email],
+			(err,results,fields)=>{
+				if(err){
+					done({"message":"Database Error","status":500},null);
+				}
+				else if(results.length<1){
+					done({"message":"User not found"},null);
+				}
+
+				else{
+					console.log(results[0].password);
+					console.log("Password is string ", typeof results[0].password)
+
+					bcrypt.compare(password, results[0].password)
+					.then(
+						(res)=>{
+							console.log("res is ", res)
+							//Password not matched and return error messgae
+							if(!res){
+								done({"message":"Wrong password"},null)
+							}
+							//Matched and return user data for session
+							else{
+								done(null, results[0].user_id);
+							}
+						}
+					)
+					.catch(
+						(err)=>{
+							console.log("Bcrypt checking password error ", err)
+						})
+				}
+			}
+		)
+	}
 }
 
 
@@ -85,6 +135,7 @@ function signUp(values, done){
 
 module.exports={
 	signUp: signUp,
+	login: login,
 	// listUsers: listUsers,
 	// singleUser: singleUser,
 	// deleteUser: deleteJob

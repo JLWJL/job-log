@@ -1,7 +1,11 @@
 'use strict';
+const config = require('./config');
 
 const express = require('express');
 const bodyPaser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
 const jobRoutes = require('../api/routes/jobRoutes')
 const userRoutes = require('../api/routes/userRoutes');
 
@@ -22,6 +26,8 @@ module.exports = function(){
 
 	app.use(bodyPaser.urlencoded({extended:true}));
 	app.use(bodyPaser.json());
+	app.use(session(config.sess));
+
 
 	//
 	// Routes

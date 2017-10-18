@@ -14,6 +14,20 @@ function SignUp(req, res, next){
 }
 
 
+function Login(req, res, next){
+	User.login(req.body, (err, result)=>{
+		if(err){
+			next(err);
+		}
+		else{
+			req.session.userId=result;
+			res.status(200).json(result);
+		}
+	});
+}
+
+
+
 // function listUsers(req,res, next){
 // 	Job.listJobs((err, results)=>{
 // 		if(err){
@@ -48,6 +62,7 @@ function SignUp(req, res, next){
 
 module.exports={
 	SignUp: SignUp,
+	Login: Login,
 	// ListUsers: listUsers,
 	// SingleUser: singleUser,
 	// DeleteUser: deleteUser,

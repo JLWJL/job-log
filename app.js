@@ -1,10 +1,6 @@
 const express = require('./config/express');
 const db = require('./config/db');
 const port = process.env.PORT||3000;
-// import {renderToString} from 'react-dom/server';
-// import  App from './client/components/App';
-// import React from 'react';
-
 
 const app = express();
 

@@ -7,8 +7,8 @@ const router = express.Router();
 router.route('/auth/signup')
 	.post(userController.SignUp)
 
-// router.route('/auth/login')
-// 	.post(userController.Login)
+router.route('/auth/login')
+	.post(userController.Login)
 
 // router.route('/:user_id')
 // 	.get(userController.Singleuser)
