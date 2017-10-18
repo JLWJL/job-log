@@ -6,7 +6,10 @@ module.exports={
 		"saveUninitialized": false,
 		"cookie":{
 			"maxAge":200000,
-		},
-		
+		},	
+	},
+
+	"jwtConfig":{
+		"SECRET":"htawen2231$$!&*11",
 	}
 }
