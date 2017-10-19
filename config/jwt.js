@@ -29,7 +29,7 @@ exports.sign = function sign(payload){
  * Invalid a token
  */
 exports.invoke = function invoke(token){
-	BlackList.set(token, EXPIRATION);
+	BlackList.set(token,'invoked', EXPIRATION);
 }
 
 
