@@ -10,6 +10,9 @@ router.route('/auth/signup')
 router.route('/auth/login')
 	.post(userController.Login)
 
+router.route('/auth/logout')
+	.post(userController.Logout)
+
 // router.route('/:user_id')
 // 	.get(userController.Singleuser)
 // 	.delete(userController.Deleteuser)
