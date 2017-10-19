@@ -19,7 +19,7 @@ exports.sign = function sign(payload){
 	let token = jwt.sign(
 		{userId:payload.user_id},
 		jwtConfig.SECRET,
-		{expiresIn:'3d'}
+		{expiresIn:'3 days'}
 	);
 	return token;
 }
@@ -36,24 +36,16 @@ exports.invoke = function invoke(token){
 /**
  * Verify a token
  */
-exports.verify = function verify(token){
+exports.verify = function verify(token, done){
 	if(!isInvoked(token)){
-		jwt.verify(token, SECRETE, (err,decoded)=>{
-			if(decoded){
-				return decoded
-			}
-			if(err.message = 'jwt expired'){
-				return({"status":JWT_EXPIRED});
-			}else{
-				return({"status":JWT_INVALID});
-			}
-			
-		});
+		jwt.verify(token, jwtConfig.SECRET, done);
 
+	}else{
+		done()
 	}
 }
 
 
-exports.isInvoked = function isInvoked(token){
+exports.isInvoked = isInvoked = function isInvoked(token){
 	return BlackList.get(token)!==undefined;
 }
