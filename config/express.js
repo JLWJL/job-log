@@ -5,6 +5,7 @@ const express = require('express');
 const bodyPaser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MW = require('../api/routes/middlewares');
 
 const jobRoutes = require('../api/routes/jobRoutes')
 const userRoutes = require('../api/routes/userRoutes');
@@ -32,7 +33,7 @@ module.exports = function(){
 	//
 	// Routes
 	//
-	app.use('/job',jobRoutes)
+	app.use('/job',MW.checkTokenStatus,jobRoutes)
 	app.use('/user', userRoutes)
 
 
@@ -40,7 +41,7 @@ module.exports = function(){
 	// Error handling
 	//
 	app.use((err,req,res,next)=>{
-		console.log("Error handled: ", err.message)
+		console.log("Error handled: ", err)
 		res.status(err.status||400).send(err.message);
 	});
 
