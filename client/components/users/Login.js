@@ -11,8 +11,12 @@ export default class Login extends React.Component{
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	handleChange(){
-
+	handleChange(e){
+		let inputName = e.target.name;
+		let value = e.target.value;
+		this.setState({
+			[inputName]:value
+		})
 	}
 
 	handleSubmit(){
