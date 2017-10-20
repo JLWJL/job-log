@@ -1,6 +1,8 @@
 'use strict';
 
 const User = require('../models/userModel');
+const jwt = require ('../../config/jwt');
+
 
 function SignUp(req, res, next){
 	
@@ -20,13 +22,19 @@ function Login(req, res, next){
 			next(err);
 		}
 		else{
-			req.session.userId=result;
-			res.status(200).json(result);
+			let token = jwt.sign(result)
+			res.status(200).json({"id": result.user_id, "token":token});
 		}
 	});
 }
 
 
+function Logout(req, res, next){
+	let token = req.get("X-Authorization");
+	jwt.invoke(token);
+
+	res.status(200).send("Logged out");
+}
 
 // function listUsers(req,res, next){
 // 	Job.listJobs((err, results)=>{
@@ -63,6 +71,7 @@ function Login(req, res, next){
 module.exports={
 	SignUp: SignUp,
 	Login: Login,
+	Logout: Logout
 	// ListUsers: listUsers,
 	// SingleUser: singleUser,
 	// DeleteUser: deleteUser,
