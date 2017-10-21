@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import AuthService from '../../services/AuthService';
 
 export default class Registration extends React.Component{
 
@@ -12,7 +13,7 @@ export default class Registration extends React.Component{
 			lastName:"",
 			password:"",
 		}
-
+		this.Auth = new AuthService();
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -28,48 +29,29 @@ export default class Registration extends React.Component{
 
 	handleSubmit(e){
 		e.preventDefault();
-
+		console.log("Auth is ", this.Auth)
 		let signUpForm = document.getElementById('user-sign-up');
-		let formData = new FormData(signUpForm);
-
-		let jsonFormData = {};
-		for(let d of formData){
-			jsonFormData[d[0]] = d[1];
-		}
-		jsonFormData = JSON.stringify(jsonFormData);
+		let formData = this.Auth.getFormData(signUpForm);
 
 		//Validation
 
 
 
 		//Submit
-		let init={
-			method: 'POST',
-			headers: {
-				"Content-Type":"application/json",
-				"Accept": "application/json, application/xml, text/plain, text/html, *.*"
-			},
-			body:jsonFormData
-		}
-
-		fetch("http://localhost:3000/user/auth/signup", init)
+		this.Auth.signup(formData)
 		.then(
 			res=>{
-				if(res.ok){
-					this.setState({
-						isRegistered:true
-					});
-					alert("Welcome!");
-				}else{
-					throw new Error(res.statusText);
-				}
+				this.setState({
+					isRegistered:true
+				});
+				alert("Welcom");
 			}
 		)
 		.catch(
 			err=>{
-				alert(err);
+				alert(err)
 			}
-		)
+		);
 	}
 
 	render(){
