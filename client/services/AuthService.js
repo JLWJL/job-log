@@ -35,11 +35,15 @@ export default class AuthService{
 
 	
 	login(credential){
-		return this.fetch(`${domain}/user/auth/login`, {
+		return this.fetch(`${this.domain}/user/auth/login`, {
 			method:'POST',
 			body: credential
 		})
-		.then()
+		.then(
+			res=>{
+				this.setToken(res.token);
+			}
+		)
 	}
 
 
@@ -52,6 +56,10 @@ export default class AuthService{
 
 	}
 
+
+	setToken(token){
+		localStorage.setItem('token', token)
+	}
 
 	fetch(url, options){
 
@@ -68,9 +76,8 @@ export default class AuthService{
 
 
 	checkStatus(res){
-		console.log("res: ",res)
 		if(res.ok){
-			return res
+			return res.json();
 		}
 		else{
 			throw new Error(`${res.status}: ${res.statusText}`);
