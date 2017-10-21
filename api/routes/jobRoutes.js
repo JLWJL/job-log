@@ -4,13 +4,15 @@ const jobController = require('../controllers/jobController');
 const express = require('express');
 const router = express.Router();
 
+const MW = require('./middlewares');
+
 router.route('/')
-	.get(jobController.ListJobs)
-	.post(jobController.CreateJob)
+	.get(MW.checkTokenStatus, jobController.ListJobs)
+	.post(MW.checkTokenStatus, jobController.CreateJob)
 
 router.route('/:app_id')
-	.get(jobController.SingleJob)
-	.delete(jobController.DeleteJob)
+	.get(MW.checkTokenStatus, jobController.SingleJob)
+	.delete(MW.checkTokenStatus, jobController.DeleteJob)
 
 
 module.exports=router;
