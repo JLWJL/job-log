@@ -9,6 +9,7 @@ export default class AuthService{
 		this.logout = this.logout.bind(this);
 		this.fetch = this.fetch.bind(this);
 		this.getFormData = this.getFormData.bind(this);
+		this.isLoggedIn = this.isLoggedIn.bind(this);
 
 	}
 
@@ -48,18 +49,28 @@ export default class AuthService{
 
 
 	logout(){
-
+		//should invoke later on
+		return this.fetch(`${this.domain}/user/auth/logout`)
+				.then(
+					res=>{
+						localStorage.removeItem('token', undefined);
+						return res
+					}
+				)
 	}
 
 
 	isLoggedIn(){
-
+		//should verify later on
+		return localStorage.getItem('token');
 	}
 
 
 	setToken(token){
+		//Should invoke later on
 		localStorage.setItem('token', token)
 	}
+
 
 	fetch(url, options){
 
@@ -67,6 +78,7 @@ export default class AuthService{
 			'headers': {
 				'Content-Type':"application/json",
 				'Accept': "application/json, application/xml, text/plain, text/html, *.*",
+				'X-Authentication': localStorage.getItem('token'),
 			},
 		}
 
