@@ -10,16 +10,38 @@ import NotFoundPage from './NotFoundPage';
 
 
 export default class Main extends React.Component{
+	constructor(props){
+		super(props);
+		this.state={
+			hasError:false,
+			error:null,
+			info:null
+		}
+	}
+
+
+	componentDidCatch(error, info){
+		this.setState({
+			hasError:true,
+			error: error,
+			info: info
+		})
+	}
+
+
 	render(){
 		return(
-			<main>
-				<Switch>
-					<IndexRoute path='/' component={JobsOverview}/>
-					<Route path='/account' component={Account}/>
-					<Route path='/help' component={HelpPage}/>
-					<Route path="*" component={NotFoundPage}/>
-				</Switch>
-			</main>
+			<main className="app-content">
+				{this.state.hasError ? (
+					<div className="error-promps">
+						<h1>Opps, Error!</h1>
+						<p>Error:</p>
+						<p>Details: </p>
+					</div>
+				):(
+					this.props.children
+				)}
+			</main>			
 		)
 	}
 }
