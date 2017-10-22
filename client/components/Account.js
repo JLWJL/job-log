@@ -20,7 +20,7 @@ export default function Account(props){
 				}/>
 
 				<Route path="/account/login" render={()=>
-					LoggedIn? <Redirect to='/account'/> : <Redirect to="/account/login"/>
+					LoggedIn? <Redirect to='/account'/> : <Login/>
 				}/>
 				
 			</Switch>
