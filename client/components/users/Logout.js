@@ -11,20 +11,28 @@ export default class Logout extends React.Component{
 			isLoggedOut:false,
 			isLoggingOut:true,
 		}
+
+		this.Auth = new AuthService();
 	}
 
 	componentDidMount(){
-		// this.Auth.logout();
 		setTimeout(()=>{
-			this.props.authProps.setUserLogin(false);
-			this.props.rProps.history.push('/');
+			this.Auth.logout()
+			.then(res=>{
+
+				this.props.authProps.setUserLogin(false);
+				this.props.rProps.history.push('/');
+			})
+			.catch(err=>{
+				alert(`Logout error ${err}`);
+			})
 
 		}, 2000)
 	}
 
 	render(){
 		const { isLoggedOut, isLoggingOut}=this.state;
-		console.log("loggedout? ",isLoggedOut)
+
 		if(isLoggedOut){
 			return <Redirect to='/' />
 		}

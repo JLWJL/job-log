@@ -49,7 +49,6 @@ export default class AuthService{
 
 
 	logout(){
-		//should invoke later on
 		return this.fetch(`${this.domain}/user/auth/logout`)
 				.then(
 					res=>{
