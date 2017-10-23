@@ -32,7 +32,7 @@ export default function(props){
 						    ):(
 						    	[
 						    		<li className="nav-item"	>
-						    			<NavLink to='/account/signup' className="nav-link">Sign up</NavLink>
+						    			<NavLink to='/signup' className="nav-link">Sign up</NavLink>
 						    		</li>,
 							    	<li className="nav-item">
 							    		<NavLink to='/account/login' className="nav-link">Log in</NavLink>
