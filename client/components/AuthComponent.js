@@ -21,7 +21,7 @@ export default class AuthComponent extends React.Component{
 		if(this.Auth.isLoggedIn()){
 			this.setState({
 				isLoggedIn:true,
-				hasError:true,
+				hasError:false,
 				error: "",
 				info: ""
 			})
@@ -37,8 +37,21 @@ export default class AuthComponent extends React.Component{
 	}
 
 
+	setUserLogin(bool){
+		this.setState({
+			isLoggedIn: bool,
+		})
+	}
+
+
+
 	render(){
 		const {isLoggedIn, hasError, error, info} = this.state;
+		const authProps = {
+			isAuthenticated: isLoggedIn,
+			setUserLogin: this.setUserLogin,
+		}
+
 		return(
 			<div className="app">
 				<Header isLoggedIn={isLoggedIn} />
@@ -54,7 +67,7 @@ export default class AuthComponent extends React.Component{
 						</details>
 					</div>
 				):(
-					<Main isLoggedIn={isLoggedIn}/>
+					<Main props={authProps}/>
 				)}
 
 				<footer>
