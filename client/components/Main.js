@@ -1,47 +1,43 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import JobsOverview from './Jobs/JobsOverview';
+
+import withAuth from './withAuth';
+import HomePage from './HomePage';
 import Account from './Account';
+import JobsOverview from './jobs/JobsOverview.js';
+import Login from './users/Login';
+import Registration from './users/Registration';
 import HelpPage from './HelpPage';
-import NewJob from './Jobs/NewJob';
 import NotFoundPage from './NotFoundPage';
 
 
+export default function Main(props){
+	const AuthAccount = withAuth(Account);
+	const AuthJobs = withAuth(JobsOverview);
+	return(
+		<main className="app-content">
+			<Switch>
+				<Route exact path='/' component={HomePage}/>
+				<Route path='/help' component={HelpPage}/>
 
+				<Route path='/jobs' render={props=>(
+						<AuthJobs/>
+					)
+				}/>
 
-export default class Main extends React.Component{
-	constructor(props){
-		super(props);
-		this.state={
-			hasError:false,
-			error:null,
-			info:null
-		}
-	}
+				<Route path='/account' render={props=>(
+						<AuthAccount/>
+					)
+				}/>
+				
+				{!props.isLoggedIn &&
+					[<Route path='/login' component={Login} />,
+					<Route path='/signup' component={Registration} />,
+					]
+				}
 
-
-	componentDidCatch(error, info){
-		this.setState({
-			hasError:true,
-			error: error,
-			info: info
-		})
-	}
-
-
-	render(){
-		return(
-			<main className="app-content">
-				{this.state.hasError ? (
-					<div className="error-promps">
-						<h1>Opps, Error!</h1>
-						<p>Error:</p>
-						<p>Details: </p>
-					</div>
-				):(
-					this.props.children
-				)}
-			</main>			
-		)
-	}
+				<Route path='/*' component={NotFoundPage}/>
+			</Switch>
+		</main>			
+	)
 }
