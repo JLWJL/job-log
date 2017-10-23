@@ -2,14 +2,15 @@ import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
 
-export default ({component:Component, authProps:authProps})=>{
-	console.log("Unauthroute: ", authProps.isAuthenticated)
+export default (props)=>{
+
 	return(
 		<Route
-			render={props=>
-				authProps.isAuthenticated?
+			path={props.path}
+			render={routeProps=>
+				props.authProps.isAuthenticated?
 				<Redirect to="/" />
-				: <Component />
+				: <props.component props={props} authProps={props.authProps}/>
 			}
 		/>
 	)

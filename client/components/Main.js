@@ -32,8 +32,8 @@ export default function Main({props}){
 					)
 				}/>
 				
-				<UnAuthRoute component={Login} authProps={props} />
-				<UnAuthRoute component={Registration} authProps={props} />
+				<UnAuthRoute path='/signup' exact component={Registration} authProps={props} />
+				<UnAuthRoute path='/login' exact component={Login} authProps={props} />
 
 				<Route path='/*' component={NotFoundPage}/>
 			</Switch>
