@@ -11,17 +11,29 @@ export default class DisplayAllJobs extends React.Component {
 	}
 
 	componentDidMount(){
-		let jobs = [];
-		fetch('http://localhost:3000/job')
-			.then((res)=>{
+		console.log("token in storage: ",localStorage.getItem('token'))
+		fetch('http://localhost:3000/job',{
+			headers:{
+				'X-Authentication':localStorage.getItem('token'),
+			}
+		})
+		.then((res)=>{
+			console.log("res: ", res);
+			if(res.ok){
 				return res.json();
+			}
+			else{
+				throw new Error("No access, check your credential");
+			}
+		})
+		.then((jobsData)=>{
+			this.setState({
+				jobs: jobsData
 			})
-			.then((jobsData)=>{
-				this.setState({
-					jobs: jobsData
-				})
-			});
-
+		})
+		.catch(
+			err=>alert(err)
+		);
 	}
 
 	render(){

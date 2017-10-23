@@ -21,7 +21,7 @@ module.exports = function(){
 	app.all('*',(req, res, next)=> {
 	  res.header("Access-Control-Allow-Origin", "*");
 	  res.header("Access-Control-Allow-Methods", 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-	  res.header("Access-Control-Allow-Headers","Content-Type");
+	  res.header("Access-Control-Allow-Headers","Content-Type, X-Authentication");
 	  next();
 	});
 
@@ -33,7 +33,7 @@ module.exports = function(){
 	//
 	// Routes
 	//
-	app.use('/job',MW.checkTokenStatus,jobRoutes)
+	app.use('/job', jobRoutes)
 	app.use('/user', userRoutes)
 
 

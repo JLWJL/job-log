@@ -1,22 +1,53 @@
 import React from 'react';
-
+import {Redirect} from 'react-router-dom';
+import AuthService from '../../services/AuthService';
 
 export default class Login extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
 			
+			email:"",
+			password:"",
 		}
+		this.Auth = new AuthService();
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	handleChange(){
+	handleChange(e){
 
+		const inputName = e.target.name;
+		const value = e.target.value;
+		
+		this.setState({
+			[inputName]:value
+		})
 	}
 
-	handleSubmit(){
+	handleSubmit(e){
+		e.preventDefault();
+		//Validation
 
+
+
+		//Submit
+		let logInForm = document.getElementById('user-log-in');
+		let credential = this.Auth.getFormData(logInForm);
+
+		this.Auth.login(credential)
+		.then(
+			res=>{
+				this.props.authProps.setUserLogin(true);
+				this.props.rProps.history.push('/')
+			}
+		)
+		.catch(
+			err=>{
+				// alert("Please check your email and password")
+				alert(`Login Error: ${err}`);
+			}
+		)
 	}
 
 
@@ -30,12 +61,12 @@ export default class Login extends React.Component{
 				
 					  <div className="form-group">
 					    <label htmlFor="email">Email</label>
-					    <input type="text" name="email" className="form-control" id="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} required/>
+					    <input type="email" name="email" className="form-control" id="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} required/>
 					  </div>
 				
 					  <div className="form-group">
 					    <label htmlFor="password">Password</label>
-					    <input type="text" name="password" className="form-control" id="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} required/>
+					    <input type="password" name="password" className="form-control" id="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} required/>
 					  </div>
 					  
 					  <button type="submit" className="btn btn-primary btn-block">Log in</button>
