@@ -6,7 +6,7 @@ export default class Login extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
-			isLoggedIn:false,
+			
 			email:"",
 			password:"",
 		}
@@ -16,8 +16,10 @@ export default class Login extends React.Component{
 	}
 
 	handleChange(e){
+
 		const inputName = e.target.name;
 		const value = e.target.value;
+		
 		this.setState({
 			[inputName]:value
 		})
@@ -36,9 +38,8 @@ export default class Login extends React.Component{
 		this.Auth.login(credential)
 		.then(
 			res=>{
-				this.setState({
-					isLoggedIn:true
-				})
+				this.props.authProps.setUserLogin(true);
+				this.props.rProps.history.push('/')
 			}
 		)
 		.catch(
@@ -76,10 +77,6 @@ export default class Login extends React.Component{
 					<a href="#" className="link-block right">
 						<span>Forgot password?</span>
 					</a>
-					{this.state.isLoggedIn && (
-					
-					  <Redirect to='/jobs'/>
-					)}
 				</div>
 			</div>
 		);
