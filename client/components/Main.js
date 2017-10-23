@@ -2,6 +2,7 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 
 import withAuth from './withAuth';
+import UnAuthRoute from './UnAuthRoute';
 import HomePage from './HomePage';
 import Account from './Account';
 import JobsOverview from './jobs/JobsOverview.js';
@@ -11,9 +12,10 @@ import HelpPage from './HelpPage';
 import NotFoundPage from './NotFoundPage';
 
 
-export default function Main(props){
+export default function Main({props}){
 	const AuthAccount = withAuth(Account);
 	const AuthJobs = withAuth(JobsOverview);
+	
 	return(
 		<main className="app-content">
 			<Switch>
@@ -30,11 +32,8 @@ export default function Main(props){
 					)
 				}/>
 				
-				{!props.isLoggedIn &&
-					[<Route path='/login' component={Login} />,
-					<Route path='/signup' component={Registration} />,
-					]
-				}
+				<UnAuthRoute component={Login} authProps={props} />
+				<UnAuthRoute component={Registration} authProps={props} />
 
 				<Route path='/*' component={NotFoundPage}/>
 			</Switch>
