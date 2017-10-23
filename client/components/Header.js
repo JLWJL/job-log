@@ -25,7 +25,7 @@ export default function(props){
 						      		<NavLink to='/account' className="nav-link">Account</NavLink>
 						      	</li>,
 						      	<li className="nav-item">
-						      		<NavLink to='/account/logout' className="nav-link">Logout</NavLink>
+						      		<NavLink to='/logout' className="nav-link">Logout</NavLink>
 						      	</li>
 
 						      ]
@@ -35,7 +35,7 @@ export default function(props){
 						    			<NavLink to='/signup' className="nav-link">Sign up</NavLink>
 						    		</li>,
 							    	<li className="nav-item">
-							    		<NavLink to='/account/login' className="nav-link">Log in</NavLink>
+							    		<NavLink to='/login' className="nav-link">Log in</NavLink>
 							    	</li>
 						    	]
 						    )
