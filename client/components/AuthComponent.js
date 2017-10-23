@@ -14,6 +14,7 @@ export default class AuthComponent extends React.Component{
 		}
 
 		this.Auth = new AuthService();
+		this.setUserLogin = this.setUserLogin.bind(this);
 	}
 
 	componentDidMount(){
