@@ -22,23 +22,27 @@ export default function withAuth(Component){
 					isLoading:false,
 				})
 			}
+			else{
+				this.setState({
+					isLoggedIn:false,
+					isLoading:false
+				})
+			}
 		}
 
 		render(){
 			const state = this.state;
 			if(state.isLoggedIn){
-				console.log("Hit component")
 				return (<Component isLoggedIn={state.isLoggedIn}/>)
 			}
 			if(state.isLoading){
-				console.log("Hit loading")
-				return <h3> Loading</h3>
+				return <h3> Loading ...</h3>
 			}
 			if(state.error){
 				throw state.error
 			}
 			else{
-				return <Redirect to="/account/login" />
+				return <Redirect to="/login" />
 			}
 		}
 	}
