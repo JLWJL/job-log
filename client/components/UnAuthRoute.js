@@ -10,7 +10,7 @@ export default (props)=>{
 			render={routeProps=>
 				props.authProps.isAuthenticated?
 				<Redirect to="/" />
-				: <props.component props={props} authProps={props.authProps}/>
+				: <props.component rProps={routeProps} authProps={props.authProps}/>
 			}
 		/>
 	)
