@@ -44,7 +44,7 @@ function login(values, done) {
       password = values.password;
 
   if (!email || !password) {
-    res.status(400).send({"message": "Invalid credentials"});
+    done({"status":400, "message": "Invalid credentials"});
 
   } else {
     db.getPool().query("SELECT * FROM user WHERE email=?", [email],
