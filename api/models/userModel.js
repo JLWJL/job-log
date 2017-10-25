@@ -17,8 +17,7 @@ function signUp(values, done) {
               let passwordHash = hash;
               let sql = "INSERT INTO user (user_id, email, first_name, last_name, password) values(UUID_SHORT(),?,?,?,?)";
 
-              db.getPool().
-                  query(sql, [email, first_name, last_name, passwordHash],
+              db.getPool().query(sql, [email, first_name, last_name, passwordHash],
                       (err, results, fields) => {
                         if (err) {
                           return done({
@@ -28,9 +27,9 @@ function signUp(values, done) {
                         }
                         return done(err, results);
                       });
-            },
+            }
         );
-      },
+      }
   ).catch((err) => {
     console.log("Bcrypt hashing password error ", err);
     done({
@@ -70,13 +69,13 @@ function login(values, done) {
                   else {
                     done(null, results[0]);
                   }
-                },
+                }
             ).catch(
                 (err) => {
                   done({"message": err, "status": 500});
                 });
           }
-        },
+        }
     );
   }
 }
