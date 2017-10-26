@@ -27,7 +27,7 @@
     "webpack-dev-server": "^2.9.1"
   },
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon client_server.js",
     "build": "webpack --watch",
     "babel": "babel app.js -d dist/svr && babel ./client/components/App.js -d dist/svr "
   },
