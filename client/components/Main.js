@@ -13,39 +13,39 @@ import HelpPage from './HelpPage';
 import NotFoundPage from './NotFoundPage';
 
 
-export default function Main({props}){
+export default function Main({props}) {
 	const AuthAccount = withAuth(Account);
 	const AuthJobs = withAuth(JobsOverview);
-	
-	return(
-		<main className="app-content">
+
+	return (
+		<main className="app-content container">
 			<Switch>
 				<Route exact path='/' component={HomePage}/>
 				<Route path='/help' component={HelpPage}/>
 
-				<Route path='/jobs' render={props=>(
-						<AuthJobs/>
-					)
+				<Route path='/jobs' render={props => (
+					<AuthJobs/>
+				)
 				}/>
 
-				<Route path='/account' render={props=>(
-						<AuthAccount/>
-					)
+				<Route path='/account' render={props => (
+					<AuthAccount/>
+				)
 				}/>
-				
-				<UnAuthRoute path='/signup' exact component={Registration} authProps={props} />
-				<UnAuthRoute path='/login' exact component={Login} authProps={props} />
+
+				<UnAuthRoute path='/signup' exact component={Registration} authProps={props}/>
+				<UnAuthRoute path='/login' exact component={Login} authProps={props}/>
 
 				<Route
-					path='/logout' exact render={routeProps=>
-						props.isAuthenticated?
-						 <Logout rProps={routeProps} authProps={props}/>
-						: <Redirect to="/" />
-					}
+					path='/logout' exact render={routeProps =>
+					props.isAuthenticated ?
+						<Logout rProps={routeProps} authProps={props}/>
+						: <Redirect to="/"/>
+				}
 				/>
 
 				<Route path='/*' component={NotFoundPage}/>
 			</Switch>
-		</main>			
+		</main>
 	)
 }
