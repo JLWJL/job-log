@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default function ({details}) {
 
@@ -11,12 +12,17 @@ export default function ({details}) {
 			return "Null";
 		}
 	}
-	console.log("Type of expire", typeof details.expire);
+
+	/**TODO
+	 * Think about display options with the tab view
+	 * */
+
+
 	return (
 		<div className="job-block">
 			<div className="left">
 				<div id="title">
-					<a href="#" target="new">{details.title}</a>
+					<Link to={`/jobs/${details.app_id}`} target="new">{details.title}</Link>
 					<i className="zmdi zmdi-star-outline"> </i>
 				</div>
 				<span id="company">{details.company} - {details.Location}</span>

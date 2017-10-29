@@ -1,20 +1,21 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import DisplayAllJobs from './DisplayAllJobs';
+import JobDetails from './JobDetails';
 import NewJob from './NewJob';
 import NotFoundPage from '../NotFoundPage';
 
 export default class JobsOverview extends React.Component {
 
-	render(){	
+	render(){
 		return(
 			<Switch>
-				<Route exact path="/" component={DisplayAllJobs}></Route>
-				
-				<Route exact path="/jobs" component={DisplayAllJobs}></Route>
-				
-				<Route path="/jobs/new-job" component={NewJob}></Route>
-				
+				<Route exact path="/" component={DisplayAllJobs} />
+
+				<Route exact path="/jobs" component={DisplayAllJobs} />
+				<Route exact path="/jobs/:app_id" component={JobDetails} />
+				<Route path="/jobs/new-job" component={NewJob} />
+
 				{<Route path='/jobs/*' component={NotFoundPage}/>}
 			</Switch>
 		)
@@ -24,5 +25,5 @@ export default class JobsOverview extends React.Component {
 
 
 	// componentDidMount(){
-		
+
 	// }
