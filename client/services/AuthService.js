@@ -1,15 +1,17 @@
 import jwtService from 'jsonwebtoken';
+import ServiceInterface from './ServiceInterface';
 
 export default class AuthService {
   constructor(domain) {
 
-    this.domain = domain || 'http://localhost:3000';
+    this.domain = 'http://localhost:3000';
     this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.fetch = this.fetch.bind(this);
     this.getFormData = this.getFormData.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
+    this.getUser = this.getUser.bind(this);
 
   }
 
@@ -39,7 +41,7 @@ export default class AuthService {
       body: credential,
     }).then(
         res => {
-          this.setToken(res.token);
+          this.setUser(res);
         },
     );
   }
@@ -50,7 +52,7 @@ export default class AuthService {
       body: null,
     }).then(
         res => {
-          localStorage.removeItem('token');
+          localStorage.removeItem('user');
           return res;
         },
     );
@@ -58,13 +60,16 @@ export default class AuthService {
 
   isLoggedIn() {
     //should verify later on
-    return localStorage.getItem('token');
+    return localStorage.getItem('user');
   }
 
-  setToken(token) {
-    //Should invoke later on
-    localStorage.setItem('token', token);
+  setUser(userObj) {
+    localStorage.setItem('user', JSON.stringify(userObj));
   }
+
+  getUser(){
+  	return JSON.parse(localStorage.getItem('user'));
+	}
 
   fetch(url, options) {
 
@@ -72,7 +77,7 @@ export default class AuthService {
       'headers': {
         'Content-Type': 'application/json',
         'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-        'X-Authentication': localStorage.getItem('token'),
+        'X-Authentication': this.getUser() || "",
       },
     };
 
