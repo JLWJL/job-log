@@ -9,11 +9,13 @@ export default class JobRecord extends React.Component {
 		this.jobService = new JobService(this.props.details.app_id);
 		this.state = {
 			isJobApplied: this.props.details.status,
+			isStarred: this.props.details.starred,
 		};
 
 		this.handleApply = this.handleApply.bind(this);
 		this.handleStatusChange = this.handleStatusChange.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
+		this.handleStar = this.handleStar.bind(this);
 
 	}
 
@@ -89,19 +91,45 @@ export default class JobRecord extends React.Component {
 			)
 	}
 
+	/**
+	 * Toggle applicaiton as starred
+	 * */
+	handleStar(e) {
+		e.preventDefault();
+		let starredStatus = this.state.isStarred === 0 ? "1" : "0";
+		this.jobService.updateJob({"starred": starredStatus})
+			.then(()=>{
+				this.setState({
+					isStarred: Number(starredStatus),
+				})
+			})
+			.catch(err=>{
+				alert(`${err}`);
+			});
+	}
+
 
 	render() {
 		const {details} = this.props;
+
 		const isJobApplied = this.state.isJobApplied === 1;
 		const classForApplied = isJobApplied ? "applied" : "";
+
+		const isStarred = this.state.isStarred === 1;
+		const classForStarred = isStarred ? "zmdi-star starred" : "zmdi-star-outline";
+
 		return (
 			<div className="job-block">
 				<div className="left">
 					<div id="title">
 						<Link to={`/jobs/${details.app_id}`} target="new">{details.title}</Link>
-						<i className="zmdi zmdi-star-outline"> </i>
+						<i className={"zmdi "+classForStarred} data-starred={isStarred ? 1 : 0}
+							 onClick={(e) => {
+								 this.handleStar(e)
+							 }}
+						> </i>
 					</div>
-					<span id="company">{details.company} - {details.Location}</span>
+					<span id="company">{details.company} - {details.location}</span>
 					<div id="description">
 						{details.description}
 					</div>
@@ -121,7 +149,7 @@ export default class JobRecord extends React.Component {
 						this.handleApply(e)
 					}} target="new">Apply</a>
 					<div id="btn-status">
-						<div id="status" className={"btn btn-secondary " + classForApplied} value={isJobApplied?1:0}
+						<div id="status" className={"btn btn-secondary " + classForApplied} data-status={isJobApplied ? 1 : 0}
 								 onClick={(e) => {
 									 this.handleStatusChange(e)
 								 }}
