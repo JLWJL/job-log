@@ -52,6 +52,10 @@
 	margin-left:10px;
 }
 
+#btn-status .applied{
+	background: green;
+}
+
 .job-block{
 	display:flex;
 	flex-wrap:wrap;
@@ -110,9 +114,8 @@
 	.buttons{
 		justify-content:space-between;
 	}
-	#btn-status{
 
-	}
+
 
 }
 

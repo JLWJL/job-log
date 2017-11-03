@@ -1,19 +1,33 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import JobService from '../../services/JobService';
 
-export default function ({details}) {
+export default class JobRecord extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.jobService = new JobService(this.props.details.app_id);
+		this.state = {
+			isJobApplied: this.props.details.status,
+		};
+
+		this.handleApply = this.handleApply.bind(this);
+		this.handleStatusChange = this.handleStatusChange.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
+
+	}
 
 	/**
 	 * Catch only yyyy-mm-dd part of a date string
 	 * @param {String} dateString
 	 * @returns {String}
 	 */
-	function stringToDate(dateString="") {
-		if (dateString !== ""&& dateString !==null) {
+	stringToDate(dateString = "") {
+		if (dateString !== "" && dateString !== null) {
 			let reg = /(\d{4})-(\d{2})-(\d{2})/;
 			let yyyymmdd = dateString.match(reg);
 			return yyyymmdd[0];
-		}else{
+		} else {
 			return "Null";
 		}
 	}
@@ -27,46 +41,100 @@ export default function ({details}) {
 	/**
 	 * Alert when no link specified, otherwise default action
 	 * */
-	function handleApply(e){
+	handleApply(e) {
 		let hasHref = e.target.href !== "" && e.target.href !== e.target.baseURI;
-		if(!hasHref) {
+		if (!hasHref) {
 			alert("You didn't save a link to the job when creating this record");
 			e.preventDefault();
 		}
 	}
 
+	/**
+	 * Change application's status asynchronously
+	 * '1' is applied, '0' is opposite
+	 * */
+	handleStatusChange(e) {
+		e.preventDefault();
+		let value = this.state.isJobApplied;
+		let status = value === 0 ? "1" : "0";
+		this.jobService.updateJob({"status": status})
+			.then(
+				() => {
+					this.setState({
+						isJobApplied: Number(status),
+					});
+					alert("Status updated!")
+				}
+			)
+			.catch(
+				err => {
+					alert(`${err}`)
+				}
+			)
+	}
+
+	handleDelete() {
+		confirm("Are you sure you want to delete this record?");
+		this.jobService.deleteJob()
+			.then(
+				() => {
+					alert("Record deleted!");
+					this.props.routeProps.history.push('/jobs');
+				}
+			)
+			.catch(
+				err => {
+					alert(`${err}`)
+				}
+			)
+	}
 
 
-	return (
-		<div className="job-block">
-			<div className="left">
-				<div id="title">
-					<Link to={`/jobs/${details.app_id}`} target="new">{details.title}</Link>
-					<i className="zmdi zmdi-star-outline"> </i>
+	render() {
+		const {details} = this.props;
+		const isJobApplied = this.state.isJobApplied === 1;
+		const classForApplied = isJobApplied ? "applied" : "";
+		return (
+			<div className="job-block">
+				<div className="left">
+					<div id="title">
+						<Link to={`/jobs/${details.app_id}`} target="new">{details.title}</Link>
+						<i className="zmdi zmdi-star-outline"> </i>
+					</div>
+					<span id="company">{details.company} - {details.Location}</span>
+					<div id="description">
+						{details.description}
+					</div>
 				</div>
-				<span id="company">{details.company} - {details.Location}</span>
-				<div id="description">
-					{details.description}
-				</div>
-			</div>
-			{/*Left end*/}
+				{/*Left end*/}
 
-			<div className="right">
-				<div id="contact"><i className="zmdi zmdi-account-box"> {details.contact ? details.contact : "Null"}</i></div>
-				<div id="salary"><i className="zmdi zmdi-money"> {details.salary ? details.salary : "Null"}</i></div>
-				<div id="expire"><i
-					className="zmdi zmdi-calendar-close">{stringToDate(details.expire)} </i>
+				<div className="right">
+					<div id="contact"><i className="zmdi zmdi-account-box"> {details.contact ? details.contact : "Null"}</i></div>
+					<div id="salary"><i className="zmdi zmdi-money"> {details.salary ? details.salary : "Null"}</i></div>
+					<div id="expire"><i
+						className="zmdi zmdi-calendar-close">{this.stringToDate(details.expire)} </i>
+					</div>
 				</div>
-			</div>
-			{/*Right end*/}
-			<div className="buttons">
-				<a className="link-apply btn btn-primary" href={details.link? details.link:""} onClick={(e)=>{handleApply(e)}} target="new">Apply</a>
-				<div id="btn-status">
-					<div id="status" className="btn btn-secondary">Applied</div>
-					<div id="status" className="btn btn-danger">Delete</div>
+				{/*Right end*/}
+				<div className="buttons">
+					<a className="link-apply btn btn-primary" href={details.link ? details.link : ""} onClick={(e) => {
+						this.handleApply(e)
+					}} target="new">Apply</a>
+					<div id="btn-status">
+						<div id="status" className={"btn btn-secondary " + classForApplied} value={isJobApplied?1:0}
+								 onClick={(e) => {
+									 this.handleStatusChange(e)
+								 }}
+						>Applied
+						</div>
+						<div id="status" className="btn btn-danger" onClick={(e) => {
+							this.handleDelete(e)
+						}}>Delete
+						</div>
+					</div>
 				</div>
+				{/*Job block end*/}
 			</div>
-			{/*Job block end*/}
-		</div>
-	);
+		);
+	}
 }

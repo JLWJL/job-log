@@ -38,7 +38,7 @@ export default class DisplayAllJobs extends React.Component {
 	render() {
 		const jobsList = this.state.jobs.map((job, i) => {
 			return (
-				<JobRecord key={i + 1} details={job}/>
+				<JobRecord key={i + 1} details={job} routeProps={this.props}/>
 			);
 		});
 
