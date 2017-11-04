@@ -9,11 +9,10 @@ import Main from './Main';
 export default class AuthComponent extends React.Component{
 	constructor(props){
 		super(props);
-		this.state={
-			isLoggedIn:false,
-		}
-
 		this.Auth = new AuthService();
+		this.state={
+			isLoggedIn:this.Auth.isLoggedIn(),
+		};
 		this.setUserLogin = this.setUserLogin.bind(this);
 	}
 
@@ -56,7 +55,7 @@ export default class AuthComponent extends React.Component{
 		return(
 			<div className="app">
 				<Header isLoggedIn={isLoggedIn} />
-				
+
 				{hasError?
 					(
 					<div className="error-promps">
@@ -74,7 +73,7 @@ export default class AuthComponent extends React.Component{
 				<footer>
 						@All rights reserved by Junlong
 					</footer>
-			</div>			
+			</div>
 		)
 	}
 
