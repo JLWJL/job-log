@@ -1,6 +1,6 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
 import AuthService from '../../services/AuthService';
+import {validateEmail, validateLength} from "../../services/ValidationService";
 
 export default class Registration extends React.Component{
 
@@ -12,7 +12,8 @@ export default class Registration extends React.Component{
 			firstName:"",
 			lastName:"",
 			password:"",
-		}
+			errMsg:"",
+		};
 		this.Auth = new AuthService();
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,15 +28,49 @@ export default class Registration extends React.Component{
 		})
 	}
 
+	handleValidation(formData){
+		let email = JSON.parse(formData).email;
+		let password = JSON.parse(formData).password;
+		let firstName = JSON.parse(formData).firstName;
+		let lastName = JSON.parse(formData).lastName;
+
+		let res = validateEmail(email);
+		if(!res.result){
+			this.setState({errMsg: res.message});
+			return false;
+		}
+
+		res = validateLength(firstName,"First name");
+		if(!res.result){
+			this.setState({errMsg: res.message});
+			return false;
+		}
+
+		res = validateLength(lastName,"Last name");
+		if(!res.result){
+			this.setState({errMsg: res.message});
+			return false;
+		}
+
+		res = validateLength(password,"Password");
+		if(!res.result){
+			this.setState({errMsg: res.message});
+			return false;
+		}
+
+		return true;
+	}
+
 	handleSubmit(e){
 		e.preventDefault();
-		console.log("Auth is ", this.Auth)
+
 		let signUpForm = document.getElementById('user-sign-up');
 		let formData = this.Auth.getFormData(signUpForm);
 
 		//Validation
-
-
+		if(!this.handleValidation(formData)){
+			return false;
+		}
 
 		//Submit
 		this.Auth.signup(formData)
@@ -44,7 +79,8 @@ export default class Registration extends React.Component{
 				this.setState({
 					isRegistered:true
 				});
-				alert("Welcom");
+				alert("Welcome");
+				this.props.rProps.history.push('/login');
 			}
 		)
 		.catch(
@@ -60,9 +96,10 @@ export default class Registration extends React.Component{
 			<div className="form-container">
 				<div className="form-signup">
 					<h2>Sign Up</h2>
+					<p style={{color:"red"}}>{ this.state.errMsg? this.state.errMsg : ""}</p>
 					<hr/>
 					<form id="user-sign-up" onSubmit={this.handleSubmit} encType="multipart/form-data">
-					
+
 					  <div className="form-group">
 					    <label htmlFor="email">Email</label>
 					    <input type="email" name="email" className="form-control" id="email" placeholder="Email" onChange={this.handleChange} value={this.state.email} required/>
@@ -79,14 +116,9 @@ export default class Registration extends React.Component{
 					    <label htmlFor="password">Password</label>
 					    <input type="password" name="password" className="form-control" id="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} required/>
 					  </div>
-					  
+
 					  <button type="submit" className="btn btn-primary btn-block">Sign up</button>
 					</form>
-					
-					{this.state.isRegistered && (
-					
-					  <Redirect to='/account/login'/>
-					)}
 				</div>
 			</div>
 		);
