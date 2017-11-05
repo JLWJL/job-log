@@ -7,7 +7,6 @@ export default class Registration extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
-			isRegistered:false,
 			email:"",
 			firstName:"",
 			lastName:"",
@@ -69,6 +68,7 @@ export default class Registration extends React.Component{
 
 		//Validation
 		if(!this.handleValidation(formData)){
+			window.scrollTo(0, 0);
 			return false;
 		}
 
@@ -76,9 +76,6 @@ export default class Registration extends React.Component{
 		this.Auth.signup(formData)
 		.then(
 			res=>{
-				this.setState({
-					isRegistered:true
-				});
 				alert("Welcome");
 				this.props.rProps.history.push('/login');
 			}
