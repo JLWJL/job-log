@@ -1,6 +1,10 @@
 /***
 * Global
 ***/
+.btn:hover{
+	cursor:pointer;
+}
+
 .link-block {
 	display: block;
 }
@@ -65,20 +69,31 @@
 	flex: 0.7;
 }
 
-#title {
+.title {
 	font-size: 1.3rem;
 }
 
-#company {
+.company {
 	font-style: italic;
 }
 
-#description {
+.description {
 	margin: 20px 0;
-	height: 120px;
+	border-radius: 10px;
+	max-height: 120px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	color: #6C7A89;
+	transition: max-height 0.6s ease-out;
+}
+
+.description:hover{
+	box-shadow: 0 0 10px #4D8FAC;
+	cursor: pointer;
+}
+
+.full-description{
+	max-height:900px;
 }
 
 .starred {
@@ -92,7 +107,7 @@
 	text-align: center;
 }
 
-#contact, #salary, #expire {
+.contact, .salary, .expire {
 	margin-bottom: 20px;
 }
 
@@ -109,7 +124,7 @@
 		padding: 0;
 	}
 
-	#contact, #salary, #expire {
+	.contact, .salary, .expire {
 		display: none;
 	}
 

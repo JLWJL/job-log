@@ -16,6 +16,7 @@ export default class JobRecord extends React.Component {
 		this.handleStatusChange = this.handleStatusChange.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleStar = this.handleStar.bind(this);
+		this.handleDescription = this.handleDescription.bind(this);
 
 	}
 
@@ -98,16 +99,34 @@ export default class JobRecord extends React.Component {
 		e.preventDefault();
 		let starredStatus = this.state.isStarred === 0 ? "1" : "0";
 		this.jobService.updateJob({"starred": starredStatus})
-			.then(()=>{
+			.then(() => {
 				this.setState({
 					isStarred: Number(starredStatus),
 				})
 			})
-			.catch(err=>{
+			.catch(err => {
 				alert(`${err}`);
 			});
 	}
 
+	/**
+	 * Toggle the full height of description block
+	 * between elems of description and clicked one itself
+	 * */
+	handleDescription(e) {
+		let classes = e.target.classList;
+
+		if(classes.contains("full-description")){
+			classes.remove("full-description");
+		}
+		else{
+			let descriptions = document.querySelectorAll(".description");
+			descriptions.forEach((elem,i)=>{
+				elem.classList.remove("full-description");
+			});
+			e.target.classList.add("full-description");
+		}
+	}
 
 	render() {
 		const {details} = this.props;
@@ -121,25 +140,28 @@ export default class JobRecord extends React.Component {
 		return (
 			<div className="job-block">
 				<div className="left">
-					<div id="title">
+					<div className="title">
 						<Link to={`/jobs/${details.app_id}`} target="new">{details.title}</Link>
-						<i className={"zmdi "+classForStarred} data-starred={isStarred ? 1 : 0}
+						<i className={"zmdi " + classForStarred} data-starred={isStarred ? 1 : 0}
 							 onClick={(e) => {
 								 this.handleStar(e)
 							 }}
 						> </i>
 					</div>
-					<span id="company">{details.company} - {details.location}</span>
-					<div id="description">
+					<span className="company">{details.company} - {details.location}</span>
+					<div className="description" onClick={(e) => {
+						this.handleDescription(e)
+					}}>
 						{details.description}
 					</div>
 				</div>
 				{/*Left end*/}
 
 				<div className="right">
-					<div id="contact"><i className="zmdi zmdi-account-box"> {details.contact ? details.contact : "Null"}</i></div>
-					<div id="salary"><i className="zmdi zmdi-money"> {details.salary ? details.salary : "Null"}</i></div>
-					<div id="expire"><i
+					<div className="contact"><i
+						className="zmdi zmdi-account-box"> {details.contact ? details.contact : "Null"}</i></div>
+					<div className="salary"><i className="zmdi zmdi-money"> {details.salary ? details.salary : "Null"}</i></div>
+					<div className="expire"><i
 						className="zmdi zmdi-calendar-close">{this.stringToDate(details.expire)} </i>
 					</div>
 				</div>
@@ -149,13 +171,13 @@ export default class JobRecord extends React.Component {
 						this.handleApply(e)
 					}} target="new">Apply</a>
 					<div id="btn-status">
-						<div id="status" className={"btn btn-secondary " + classForApplied} data-status={isJobApplied ? 1 : 0}
+						<div className={"status btn btn-secondary " + classForApplied} data-status={isJobApplied ? 1 : 0}
 								 onClick={(e) => {
 									 this.handleStatusChange(e)
 								 }}
 						>Applied
 						</div>
-						<div id="status" className="btn btn-danger" onClick={(e) => {
+						<div className="btn btn-danger" onClick={(e) => {
 							this.handleDelete(e)
 						}}>Delete
 						</div>
