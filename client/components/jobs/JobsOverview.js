@@ -13,7 +13,7 @@ export default class JobsOverview extends React.Component {
 				<Route exact path="/" component={DisplayAllJobs} />
 
 				<Route exact path="/jobs" component={DisplayAllJobs} />
-				<Route exact path="/jobs/:app_id" component={JobDetails} />
+				<Route exact path="/jobs/:app_id(\d+)" component={JobDetails} />
 				<Route path="/jobs/new-job" component={NewJob} />
 
 				{<Route path='/jobs/*' component={NotFoundPage}/>}
