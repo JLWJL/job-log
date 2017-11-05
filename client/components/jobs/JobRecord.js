@@ -77,19 +77,21 @@ export default class JobRecord extends React.Component {
 	}
 
 	handleDelete() {
-		confirm("Are you sure you want to delete this record?");
-		this.jobService.deleteJob()
-			.then(
-				() => {
-					alert("Record deleted!");
-					this.props.routeProps.history.push('/jobs');
-				}
-			)
-			.catch(
-				err => {
-					alert(`${err}`)
-				}
-			)
+		let confirm = window.confirm("Are you sure you want to delete this record?");
+		if(confirm){
+			this.jobService.deleteJob()
+				.then(
+					() => {
+						alert("Record deleted!");
+						this.props.routeProps.history.push('/jobs');
+					}
+				)
+				.catch(
+					err => {
+						alert(`${err}`)
+					}
+				)
+		}
 	}
 
 	/**
