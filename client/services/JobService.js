@@ -1,8 +1,11 @@
 export default class JobService {
 	constructor(appId) {
 		this.domain = "http://localhost:3000";
-		this.appId = appId;
+		if(appId!==null){
+			this.appId = appId;
+		}
 		this.getJob = this.getJob.bind(this);
+		this.newJob = this.newJob.bind(this);
 		this.updateJob = this.updateJob.bind(this);
 		this.deleteJob = this.deleteJob.bind(this);
 	}
@@ -22,6 +25,25 @@ export default class JobService {
 				}
 			})
 	}
+
+	newJob(body) {
+		return fetch(`${this.domain}/job`, {
+			"method": "POST",
+			"body": body,
+			"headers": {
+				'Content-Type': 'application/json',
+				"X-Authentication": JSON.parse(localStorage.getItem('user')).token,
+			}
+		})
+			.then(res => {
+				if (res.ok) {
+					return res.json();
+				} else {
+					throw new Error("Create job error: " + res.statusText);
+				}
+			})
+	}
+
 
 	updateJob(body) {
 
