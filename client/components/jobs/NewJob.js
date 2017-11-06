@@ -162,7 +162,7 @@ export default class NewJob extends React.Component {
 					</div>
 
 					<button type="submit" className="btn btn-primary" onClick={(e) => {this.handleSubmit(e)}}>OK</button>
-					<button type="button" className="btn btn-danger">Cancel</button>
+					<Link to='/jobs' className="btn btn-danger right">Cancel</Link>
 				</form>
 
 			</div>
