@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import DisplayAllJobs from './DisplayAllJobs';
-import JobDetails from './JobDetails';
+import JobDetails from './UpdateJob';
 import NewJob from './NewJob';
 import NotFoundPage from '../NotFoundPage';
 
