@@ -25,13 +25,16 @@ export default class JobRecord extends React.Component {
 	 * @param {String} dateString
 	 * @returns {String}
 	 */
-	stringToDate(dateString = "") {
+	stringToDate(dateString) {
 		if (dateString !== "" && dateString !== null) {
-			let reg = /(\d{4})-(\d{2})-(\d{2})/;
-			let yyyymmdd = dateString.match(reg);
-			return yyyymmdd[0];
+			let date = new Date(dateString);
+			let options = {year:"numeric", month:"2-digit", day:"2-digit"};
+			let dateStr = date.toLocaleDateString("en-GB", options); // in dd/m,/yyyy format
+			let newDateString = dateStr.split('/').reverse().join('-'); //convert yyyy/mm/dd
+
+			return newDateString;
 		} else {
-			return "Null";
+			return "";
 		}
 	}
 

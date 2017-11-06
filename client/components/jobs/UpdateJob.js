@@ -3,7 +3,7 @@ import JobService from '../../services/JobService';
 import {Link} from 'react-router-dom';
 import {validateLength} from "../../services/ValidationService";
 
-class JobDetails extends React.Component {
+export default class UpdateJob extends React.Component {
 	constructor(props) {
 		super(props);
 		this.appId = this.props.match.params.app_id;
@@ -67,9 +67,11 @@ class JobDetails extends React.Component {
 
 	stringToDate(dateString) {
 		if (dateString !== "" && dateString !== null) {
-			let reg = /(\d{4})-(\d{2})-(\d{2})/;
-			let yyyymmdd = dateString.match(reg);
-			return yyyymmdd[0];
+			let date = new Date(dateString);
+			let options = {year:"numeric", month:"2-digit", day:"2-digit"};
+			let dateStr = date.toLocaleDateString("en-GB", options); // in dd/m,/yyyy format
+			let newDateString = dateStr.split('/').reverse().join('-'); //convert yyyy/mm/dd
+			return newDateString;
 		} else {
 			return "";
 		}
@@ -153,15 +155,8 @@ class JobDetails extends React.Component {
 		if (jobData !== "") {
 			return (
 				<div>
-					<h1> Title {jobData.title}</h1>
-					<h1> Company {jobData.company} </h1>
-					<h1> Expire {jobData.expire} </h1>
-					<h1> Contact {jobData.contact} </h1>
-					<h1> Title {jobData.title} </h1>
-					<h1> Title {jobData.title} </h1>
-					<h1> Title {jobData.title} </h1>
-
-
+					<h2>Update record</h2>
+					<hr/>
 					<form id="update-job-form" onSubmit={this.handleSubmit} encType="multipart/form-data">
 						<p style={{color: "red"}}>{this.state.errMsg}</p>
 						<div className="form-group">
@@ -230,5 +225,3 @@ class JobDetails extends React.Component {
 		}
 	}
 }
-
-export default JobDetails;
