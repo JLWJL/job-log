@@ -2,6 +2,10 @@ import React from 'react';
 import {validateLength} from "../../services/ValidationService";
 import JobService from '../../services/JobService';
 
+/**TODO
+ * input type url seems not working
+ */
+
 export default class NewJob extends React.Component {
 
 	constructor() {
@@ -138,7 +142,8 @@ export default class NewJob extends React.Component {
 					<div className="form-group">
 						<label htmlFor="link">Link</label>
 						<input type="url" name="link" className="form-control" id="link"
-									 placeholder="Website hyperlink: http://www.example.com"/>
+									 placeholder="Website hyperlink: http://www.example.com"
+									 onChange={this.handleChange} value={this.state.link}/>
 					</div>
 					<div className="form-group">
 						<label htmlFor="expire">Expire date</label>
