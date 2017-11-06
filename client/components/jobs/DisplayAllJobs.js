@@ -22,7 +22,7 @@ export default class DisplayAllJobs extends React.Component {
 					return res.json();
 				}
 				else {
-					throw new Error("No access, check your credential");
+					throw new Error(res.statusText);
 				}
 			})
 			.then((jobsData) => {
