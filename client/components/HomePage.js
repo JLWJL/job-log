@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-export default (props)=>{
-	return(
-		<h3>Home page</h3>
+export default (props) => {
+  return (
+    <h3>Home page</h3>
 
-	)
+  );
 }

@@ -2,7 +2,7 @@ import jwtService from 'jsonwebtoken';
 import ServiceInterface from './ServiceInterface';
 
 export default class AuthService {
-  constructor(domain) {
+  constructor (domain) {
 
     this.domain = 'http://localhost:3000';
     this.signup = this.signup.bind(this);
@@ -18,7 +18,7 @@ export default class AuthService {
   /**
    * Collect form data and convert to json format
    */
-  getFormData(formElement) {
+  getFormData (formElement) {
     let formData = new FormData(formElement);
 
     let jsonFormData = {};
@@ -28,56 +28,56 @@ export default class AuthService {
     return JSON.stringify(jsonFormData);
   }
 
-  signup(formdata) {
+  signup (formdata) {
     return this.fetch(`${this.domain}/user/auth/signup`, {
       'method': 'POST',
       'body': formdata,
     });
   }
 
-  login(credential) {
+  login (credential) {
     return this.fetch(`${this.domain}/user/auth/login`, {
       method: 'POST',
       body: credential,
     }).then(
-        res => {
-          this.setUser(res);
-        },
+      res => {
+        this.setUser(res);
+      },
     );
   }
 
-  logout() {
+  logout () {
     return this.fetch(`${this.domain}/user/auth/logout`, {
       method: 'POST',
       body: null,
     }).then(
-        res => {
-          localStorage.removeItem('user');
-          return res;
-        },
+      res => {
+        localStorage.removeItem('user');
+        return res;
+      },
     );
   }
 
-  isLoggedIn() {
+  isLoggedIn () {
     //should verify later on
     return localStorage.getItem('user');
   }
 
-  setUser(userObj) {
+  setUser (userObj) {
     localStorage.setItem('user', JSON.stringify(userObj));
   }
 
-  getUser(){
-  	return JSON.parse(localStorage.getItem('user'));
-	}
+  getUser () {
+    return JSON.parse(localStorage.getItem('user'));
+  }
 
-  fetch(url, options) {
+  fetch (url, options) {
 
     let init = {
       'headers': {
         'Content-Type': 'application/json',
         'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-        'X-Authentication': this.getUser() || "",
+        'X-Authentication': this.getUser() || '',
       },
     };
 
@@ -85,7 +85,7 @@ export default class AuthService {
     return fetch(url, newInit).then(this.checkStatus);
   }
 
-  checkStatus(res) {
+  checkStatus (res) {
     if (res.ok) {
       return res.json();
     }
