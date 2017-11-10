@@ -1,10 +1,10 @@
 import jwtService from 'jsonwebtoken';
-import ServiceInterface from './ServiceInterface';
+//import ServiceInterface from './ServiceInterface';
 
 export default class AuthService {
   constructor (domain) {
 
-    this.domain = 'http://localhost:3000';
+    this.domain = process.env.API_URL || 'http://localhost:3000/api';
     this.signup = this.signup.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -29,14 +29,14 @@ export default class AuthService {
   }
 
   signup (formdata) {
-    return this.fetch(`${this.domain}/user/auth/signup`, {
+    return this.fetch(`${this.domain}/v1/user/auth/signup`, {
       'method': 'POST',
       'body': formdata,
     });
   }
 
   login (credential) {
-    return this.fetch(`${this.domain}/user/auth/login`, {
+    return this.fetch(`${this.domain}/v1/user/auth/login`, {
       method: 'POST',
       body: credential,
     }).then(
@@ -47,7 +47,7 @@ export default class AuthService {
   }
 
   logout () {
-    return this.fetch(`${this.domain}/user/auth/logout`, {
+    return this.fetch(`${this.domain}/v1/user/auth/logout`, {
       method: 'POST',
       body: null,
     }).then(

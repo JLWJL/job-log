@@ -5,6 +5,11 @@
   "main": "index.js",
   "author": "Junlong",
   "license": "MIT",
+  "engines":{
+    "node": "6.11.2",
+    "yarn": "1.1.0",
+    "npm": "5.5.1"
+  },
   "dependencies": {
     "bootstrap": "^3.3.7",
     "cookie-parser": "^1.4.3",
@@ -22,6 +27,7 @@
     "webpack-dev-server": "^2.9.1"
   },
   "scripts": {
+    "postinstall": "webpack -p --config webpack.config.js --progress --colors",
     "start": "nodemon client_server.js",
     "build": "webpack --watch",
     "babel": "babel app.js -d dist/svr && babel ./client/components/App.js -d dist/svr "

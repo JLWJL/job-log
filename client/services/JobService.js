@@ -1,6 +1,6 @@
 export default class JobService {
   constructor (appId) {
-    this.domain = 'http://localhost:3000';
+    this.domain = process.env.API_URL || 'http://localhost:3000';
     if (appId !== null) {
       this.appId = appId;
     }
@@ -11,7 +11,7 @@ export default class JobService {
   }
 
   getJob () {
-    return fetch(`${this.domain}/job/${this.appId}`, {
+    return fetch(`${this.domain}/v1/job/${this.appId}`, {
       'method': 'GET',
       'headers': {
         'X-Authentication': JSON.parse(localStorage.getItem('user')).token,
@@ -26,7 +26,7 @@ export default class JobService {
   }
 
   newJob (body) {
-    return fetch(`${this.domain}/job`, {
+    return fetch(`${this.domain}/v1/job`, {
       'method': 'POST',
       'body': body,
       'headers': {
@@ -44,7 +44,7 @@ export default class JobService {
 
   updateJob (body) {
 
-    return fetch(`${this.domain}/job/${this.appId}`, {
+    return fetch(`${this.domain}/v1/job/${this.appId}`, {
       'method': 'PUT',
       'body': JSON.stringify(body),
       'headers': {
@@ -61,7 +61,7 @@ export default class JobService {
   }
 
   deleteJob () {
-    return fetch(`${this.domain}/job/${this.appId}`, {
+    return fetch(`${this.domain}/v1/job/${this.appId}`, {
       'method': 'DELETE',
       'headers': {
         'Content-Type': 'application/json',

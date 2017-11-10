@@ -12,7 +12,7 @@ export default class DisplayAllJobs extends React.Component {
   }
 
   componentDidMount () {
-    fetch('http://localhost:3000/job', {
+    fetch(process.env.API_URL + '/v1/job' || 'http://localhost:3000/api/v1/job', {
       headers: {
         'X-Authentication': JSON.parse(localStorage.getItem('user')).token,
       },
