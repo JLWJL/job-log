@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 export default function (props) {
 
   return (
-    <header>
+    <header className="fixed-top">
       <nav className="navbar navbar-expand-lg navbar-light">
         <a className="navbar-brand" href="#">Logo</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse"
@@ -18,7 +18,7 @@ export default function (props) {
             {props.isLoggedIn ? (
               [
                 <li className="nav-item">
-                  <NavLink to='/jobs' className="nav-link">Your jobs</NavLink>
+                  <NavLink to='/jobs' className="nav-link">Jobs</NavLink>
                 </li>,
                 <li className="nav-item">
                   <NavLink to='/account' className="nav-link">Account</NavLink>
