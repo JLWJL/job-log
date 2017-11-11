@@ -1,6 +1,6 @@
 export default class JobService {
   constructor (appId) {
-    this.domain = process.env.API_URL || 'http://localhost:3000';
+    this.domain = process.env.API_URL || 'http://localhost:3000/api';
     if (appId !== null) {
       this.appId = appId;
     }
@@ -8,6 +8,23 @@ export default class JobService {
     this.newJob = this.newJob.bind(this);
     this.updateJob = this.updateJob.bind(this);
     this.deleteJob = this.deleteJob.bind(this);
+    this.listJobs = this.listJobs.bind(this);
+  }
+
+  listJobs(){
+    return fetch(`${this.domain}/v1/job`, {
+      'method': 'GET',
+      'headers': {
+        'X-Authentication': JSON.parse(localStorage.getItem('user')).token,
+      },
+    })
+      .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error('List jobs error: ' + res.statusText);
+      }
+    })
   }
 
   getJob () {
