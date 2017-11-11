@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import JobService from '../../services/JobService';
 import JobRecord from './JobRecord';
 
 export default class DisplayAllJobs extends React.Component {
@@ -9,27 +10,17 @@ export default class DisplayAllJobs extends React.Component {
     this.state = {
       jobs: [],
     };
+    this.jobService = new JobService();
   }
 
   componentDidMount () {
-    fetch(process.env.API_URL + '/v1/job' || 'http://localhost:3000/api/v1/job', {
-      headers: {
-        'X-Authentication': JSON.parse(localStorage.getItem('user')).token,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      else {
-        throw new Error(res.statusText);
-      }
-    }).then((jobsData) => {
+    this.jobService.listJobs().then(jobData => {
       this.setState({
-        jobs: jobsData,
+        jobs: jobData,
       });
-    }).catch(
-      err => alert(err),
-    );
+    }).catch(err => {
+      alert(err);
+    });
   }
 
   render () {
