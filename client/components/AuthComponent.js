@@ -4,6 +4,7 @@ import AuthService from '../services/AuthService';
 
 import Header from './Header';
 import Main from './Main';
+import Footer from './Footer';
 
 export default class AuthComponent extends React.Component {
   constructor (props) {
@@ -65,9 +66,7 @@ export default class AuthComponent extends React.Component {
           <Main props={authProps}/>
         )}
 
-        <footer>
-          @All rights reserved by Junlong
-        </footer>
+        <Footer />
       </div>
     );
   }

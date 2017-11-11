@@ -17,6 +17,12 @@
     float: right;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
 /**
 * Header
  */
@@ -43,7 +49,7 @@ a.nav-link {
 }
 
 a.nav-link:hover, a.nav-link.active {
-    background: linear-gradient(to right, #457fca, #5691c8);
+    background: #283593;
     border-radius: 25px;
     color: white !important;
 }
@@ -66,6 +72,54 @@ a.nav-link:hover, a.nav-link.active {
     justify-content: space-evenly;
     flex: 1;
 }
+
+/**
+ * Main area
+ */
+
+.app-content {
+    margin-top: 200px;
+    margin-bottom: 100px;
+}
+
+/**
+ * Footer
+ */
+footer {
+    background: linear-gradient(to right, #457fca, #5691c8);
+    min-height: 200px;
+}
+
+.footer-container {
+    display: flex;
+    padding: 25px 100px 50px;
+    flex-wrap: wrap;
+}
+
+.footer-container > div:not([class='footer-jargon']) {
+    margin-bottom: 40px;
+    margin-right: 2%;
+    min-width: 110px;
+    flex-basis: 18%;
+}
+
+.footer-title {
+    display: block;
+    /*margin-bottom: 15px;*/
+    font-weight: bold;
+    color: ghostwhite;
+}
+
+.footer-jargon {
+    flex-basis: 37%;
+    padding-right: 70px;
+    margin-bottom: 40px;
+}
+
+footer a, footer a:hover {
+    color: ghostwhite;
+}
+
 
 /***
 * Registration and login form 
@@ -162,6 +216,18 @@ a.nav-link:hover, a.nav-link.active {
 }
 
 @media screen and (max-width: 680px) {
+
+    .footer-container {
+        padding: 25px 50px 50px;
+        text-align: center;
+    }
+
+    .footer-container > div {
+        margin-right: 0!important;
+        flex-basis: 100%!important;
+        padding:0!important;
+    }
+
     .job-block {
         flex-wrap: wrap;
     }
