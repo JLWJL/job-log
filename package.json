@@ -27,9 +27,9 @@
     "webpack-dev-server": "^2.9.1"
   },
   "scripts": {
-    "postinstall": "webpack -p --config webpack.config.js --progress --colors",
+    "postinstall": "webpack -p --config webpack.config.prod.js --progress --colors",
     "start": "nodemon client_server.js",
-    "build": "webpack --watch",
+    "build:dev": "webpack --config webpack.config.dev.js --watch",
     "babel": "babel app.js -d dist/svr && babel ./client/components/App.js -d dist/svr "
   },
   "devDependencies": {
