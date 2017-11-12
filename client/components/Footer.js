@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default () => {
   return (
     <footer>
-      <div className="footer-container">
+      <div className="footer-links-container">
         <div className="footer-jargon">
           <span className="footer-title"> Job Log </span>
           <sub>
@@ -37,6 +37,11 @@ export default () => {
             <li><Link to='/login'> Newsletters </Link></li>
           </ul>
         </div>
+      </div>
+      <div className="footer-social-container">
+        <i className="zmdi zmdi-twitter" title="twitter"></i>
+        <i className="zmdi zmdi-facebook" title="facebook"></i>
+        <i className="zmdi zmdi-linkedin" title="linkedin"></i>
       </div>
     </footer>
   );
