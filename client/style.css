@@ -191,6 +191,10 @@ footer a, footer a:hover {
     text-align:center;
 }
 
+.card{
+    border:none;
+}
+
 .title{
     min-width:225px;
 }
