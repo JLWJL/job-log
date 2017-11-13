@@ -26,12 +26,13 @@ export default class DisplayAllJobs extends React.Component {
   render () {
     const jobsList = this.state.jobs.map((job, i) => {
       return (
-        <JobRecord key={i + 1} details={job} routeProps={this.props}/>
+        <JobRecord key={i + 1} unique={i + 1} details={job}
+                   routeProps={this.props}/>
       );
     });
 
     return (
-      <div className="jobs">
+      <div className="jobs" id="accordion" role="tablist">
         {jobsList}
         <Link to="/jobs/new-job" className="btn btn-primary">New Job</Link>
       </div>

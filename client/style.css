@@ -32,7 +32,7 @@ header {
 }
 
 .mr-auto {
-    margin-right: 0 !important;
+    /*margin-right: 0 !important;*/
 }
 
 header .nav-link {
@@ -167,6 +167,38 @@ footer a, footer a:hover {
 /**
  Single job display START
  */
+
+/*New start*/
+.card{
+    margin:15px 0;
+}
+
+.job-bar{
+    display:flex;
+    /*   flex-direction:column; */
+    align-items:center;
+    border-radius:5px;
+    border:1px groove lightgrey;
+    cursor: pointer;
+    text-align:center;
+    /*   width:100%; */
+}
+.job-bar:hover{
+    box-shadow: 0 2px 1px 1px grey;
+}
+
+.job-bar > div:not(:first-child){
+    text-align:center;
+}
+
+.title{
+    min-width:225px;
+}
+
+
+/*New end*/
+
+/*Old*/
 .buttons {
     flex-basis: 100%;
     display: flex;
@@ -196,14 +228,6 @@ footer a, footer a:hover {
 
 .left {
     flex: 0.7;
-}
-
-.title {
-    font-size: 1.3rem;
-}
-
-.company {
-    font-style: italic;
 }
 
 .description {

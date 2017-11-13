@@ -34,7 +34,7 @@ export default class JobRecord extends React.Component {
 
       return newDateString;
     } else {
-      return '';
+      return '-';
     }
   }
 
@@ -98,6 +98,7 @@ export default class JobRecord extends React.Component {
    * */
   handleStar (e) {
     e.preventDefault();
+    e.stopPropagation();
     let starredStatus = this.state.isStarred === 0 ? '1' : '0';
     this.jobService.updateJob({'starred': starredStatus}).then(() => {
       this.setState({
@@ -139,63 +140,53 @@ export default class JobRecord extends React.Component {
       : 'zmdi-star-outline';
 
     return (
-      <div className="job-block">
-        <div className="left">
-          <div className="title">
-            <Link to={`/jobs/${details.app_id}`}
-                  target="new">{details.title}</Link>
-            <i className={'zmdi ' + classForStarred}
-               data-starred={isStarred ? 1 : 0}
-               onClick={(e) => {
-                 this.handleStar(e);
-               }}
-            > </i>
-          </div>
-          <span className="company">{details.company}
-            - {details.location}</span>
-          <div className="description" onClick={(e) => {
-            this.handleDescription(e);
-          }}>
-            {details.description}
-          </div>
-        </div>
-        {/*Left end*/}
+      <div className="card">
+        <div className="job-bar row card-header collapsed"
+             data-target={`#${this.props.unique}`}
+             role="tab" data-toggle="collapse" aria-expanded="false"
+             aria-controls={this.props.unique}>
 
-        <div className="right">
-          <div className="contact"><i
-            className="zmdi zmdi-account-box"> {details.contact
-            ? details.contact
-            : 'Null'}</i></div>
-          <div className="salary"><i
-            className="zmdi zmdi-money"> {details.salary
-            ? details.salary
-            : 'Null'}</i></div>
-          <div className="expire"><i
-            className="zmdi zmdi-calendar-close">{this.stringToDate(
-            details.expire)} </i>
+          <div className="title col-lg-1 col-md-4 col-12 order-lg-1">
+            <strong>
+              {details.title}
+            </strong>
+          </div>
+
+          <i className={'zmdi col-6 col-md-4 col-lg-1 ' + classForStarred}
+             data-starred={isStarred ? 1 : 0}
+             onClick={(e) => {
+               this.handleStar(e);
+             }}
+          > </i>
+
+          <div className="options col-6 col-md-4 col-lg-1 order-lg-2">
+            <i className="material-icons">***</i>
+          </div>
+
+          {/*<div className="apply">*/}
+          {/*<a className="link-apply btn btn-primary btn-sm"*/}
+          {/*href={details.link ? details.link : ''} onClick={(e) => {*/}
+          {/*this.handleApply(e);*/}
+          {/*}} target="new">Apply</a>*/}
+          {/*</div>*/}
+
+
+
+          <i className="col-12 col-sm-4 col-lg-3 order-lg-3">
+            {details.company}
+          </i>
+          <div className="location col-12 col-sm-4 col-lg-2 order-lg-4">
+            {details.location}
+          </div>
+          <div className="deadline col-12 col-sm-4 col-lg-2 order-lg-5">
+            {this.stringToDate(details.expire)}
           </div>
         </div>
-        {/*Right end*/}
-        <div className="buttons">
-          <a className="link-apply btn btn-primary"
-             href={details.link ? details.link : ''} onClick={(e) => {
-            this.handleApply(e);
-          }} target="new">Apply</a>
-          <div id="btn-status">
-            <div className={'status btn btn-secondary ' + classForApplied}
-                 data-status={isJobApplied ? 1 : 0}
-                 onClick={(e) => {
-                   this.handleStatusChange(e);
-                 }}
-            >Applied
-            </div>
-            <div className="btn btn-danger" onClick={(e) => {
-              this.handleDelete(e);
-            }}>Delete
-            </div>
-          </div>
+
+        <div id={this.props.unique} className="collapse" role="tabpanel"
+             data-parent="#accordion">
+          hellllll
         </div>
-        {/*Job block end*/}
       </div>
     );
   }
