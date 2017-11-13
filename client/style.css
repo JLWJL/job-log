@@ -219,8 +219,13 @@ footer a, footer a:hover {
     margin-left: 10px;
 }
 
-#btn-status .applied {
-    background: green;
+.applied {
+    background: lightgreen;
+}
+
+.options .dropdown-menu{
+    min-width: unset;
+    padding:0.25rem 1rem;
 }
 
 .job-block {

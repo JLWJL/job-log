@@ -160,7 +160,33 @@ export default class JobRecord extends React.Component {
           > </i>
 
           <div className="options col-6 col-md-4 col-lg-1 order-lg-2">
-            <i className="material-icons">***</i>
+            <div class="dropdown">
+              <a class="btn btn-primary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a className="dropdown-item"
+                   href={details.link ? details.link : ''} onClick={(e) => {
+                  this.handleApply(e);
+                }} target="new">Apply</a>
+                <Link to={`/jobs/${details.app_id}`}
+                      className="dropdown-item"
+                      target="new">Edit</Link>
+                <a className={'status dropdown-item ' + classForApplied}
+                     data-status={isJobApplied ? 1 : 0}
+                     onClick={(e) => {
+                       this.handleStatusChange(e);
+                     }}
+                >Applied
+                </a>
+
+                <div class="dropdown-divider"></div>
+                <a className="dropdown-item bg-danger" onClick={(e) => {
+                  this.handleDelete(e);
+                }}>Delete
+                </a>
+              </div>
+            </div>
           </div>
 
           {/*<div className="apply">*/}
