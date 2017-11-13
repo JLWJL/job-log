@@ -17,29 +17,29 @@ export default function (props) {
           <ul className="navbar-nav mr-auto">
             {props.isLoggedIn ? (
               [
-                <li className="nav-item">
+                <li key={1} className="nav-item">
                   <NavLink to='/jobs' className="nav-link">Jobs</NavLink>
                 </li>,
-                <li className="nav-item">
+                <li key={2} className="nav-item">
                   <NavLink to='/account' className="nav-link">Account</NavLink>
                 </li>,
-                <li className="nav-item">
+                <li key={3} className="nav-item">
                   <NavLink to='/logout' className="nav-link">Logout</NavLink>
                 </li>,
 
               ]
             ) : (
               [
-                <li className="nav-item">
+                <li key={4} className="nav-item">
                   <NavLink to='/signup' className="nav-link">Sign up</NavLink>
                 </li>,
-                <li className="nav-item">
+                <li key={5} className="nav-item">
                   <NavLink to='/login' className="nav-link">Log in</NavLink>
                 </li>,
               ]
             )
             }
-            <li className="nav-item">
+            <li key={6} className="nav-item">
               <NavLink to='/help' className="nav-link">Help</NavLink>
             </li>
           </ul>
