@@ -1,9 +1,9 @@
 /***
 * Global
 ***/
-.app{
-    max-width:1400px;
-    margin:0 auto;
+.app {
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .btn:hover {
@@ -32,12 +32,11 @@ ul {
 * Header
  */
 header {
-    max-width:1400px;
-    margin:0 auto;
+    max-width: 1400px;
+    margin: 0 auto;
     box-shadow: 0 1px 10px 5px rgba(0, 0, 255, 0.1);
     background-color: #f5f5f5;
 }
-
 
 header .nav-link {
     padding: 0.1rem 1rem !important;
@@ -124,18 +123,18 @@ footer a, footer a:hover {
     color: ghostwhite;
 }
 
-.footer-social-container{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:50px;
+.footer-social-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
     background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
 }
 
-.footer-social-container i{
+.footer-social-container i {
     text-align: center;
-    height:20px;
-    width:20px;
+    height: 20px;
+    width: 20px;
     margin-right: 4%;
     cursor: pointer;
     -webkit-transition: color 0.2s linear;
@@ -145,10 +144,9 @@ footer a, footer a:hover {
     transition: color 0.2s linear;
 }
 
-.footer-social-container i:hover{
-    color:ghostwhite;
+.footer-social-container i:hover {
+    color: ghostwhite;
 }
-
 
 /***
 * Registration and login form 
@@ -173,36 +171,38 @@ footer a, footer a:hover {
  */
 
 /*New start*/
-.card{
-    margin:15px 0;
+.card {
+    margin: 15px 0;
 }
 
-.job-bar{
-    display:flex;
+.job-bar {
+    display: flex;
     /*   flex-direction:column; */
-    align-items:center;
-    border-radius:5px;
-    border:1px groove lightgrey;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px groove lightgrey;
+    margin-left: 0px;
+    margin-right: 0px;
     cursor: pointer;
-    text-align:center;
+    text-align: center;
     /*   width:100%; */
 }
-.job-bar:hover{
+
+.job-bar:hover {
     box-shadow: 0 2px 1px 1px grey;
 }
 
-.job-bar > div:not(:first-child){
-    text-align:center;
+.job-bar > div:not(:first-child) {
+    text-align: center;
 }
 
-.card{
-    border:none;
+.title {
+    min-width: 213px;
 }
 
-.title{
-    min-width:225px;
+.panel-job-detail {
+    padding: 20px;
 }
-
 
 /*New end*/
 
@@ -227,33 +227,30 @@ footer a, footer a:hover {
     background: lightgreen;
 }
 
-.options .dropdown-menu{
+.options .dropdown-menu {
     min-width: unset;
-    padding:0.25rem 1rem;
+    padding: 0.25rem 1rem;
 }
 
-.job-block {
+.job-detail-block {
     display: flex;
     flex-wrap: wrap;
-    padding: 30px 20px;
-    border-bottom: 1px black solid
+    /*padding: 30px 20px;*/
+    /*border-bottom: 1px black solid*/
 }
 
-.left {
+.job-desc {
     flex: 0.7;
-}
-
-.description {
-    margin: 20px 0;
+    margin: 20px 0 0;
     border-radius: 10px;
-    max-height: 120px;
+    height: 300px;
     overflow: hidden;
-    text-overflow: ellipsis;
+    /*text-overflow: ellipsis;*/
     color: #6C7A89;
     transition: max-height 0.6s ease-out;
 }
 
-.description:hover {
+.job-desc:hover {
     box-shadow: 0 0 10px #4D8FAC;
     cursor: pointer;
 }
@@ -263,24 +260,63 @@ footer a, footer a:hover {
 }
 
 .zmdi-star-outline {
-    cursor:pointer;
+    cursor: pointer;
     color: #FFB61E;
 }
 
-.zmdi-star{
-    cursor:pointer;
+.zmdi-star {
+    cursor: pointer;
     color: #FFB61E;
 }
 
-.right {
+.job-misc {
     flex: 0.3;
+    margin:20px 0 0;
     padding-left: 20px;
-    text-align: center;
+    max-width:175px;
 }
 
-.contact, .salary, .expire {
+.job-misc .contact,
+.job-misc .salary,
+.job-misc .deadline,
+.job-misc .company,
+.job-misc .location{
     margin-bottom: 20px;
 }
+
+.job-misc .deadline,
+.job-misc .company,
+.job-misc .location{
+    display:none;
+}
+
+.contact i::after, .salary i::after,
+.deadline i::after, .company i::after,
+.location i::after{
+    content: ' ';
+    white-space: pre;
+}
+
+
+
+
+
+
+@media screen and (max-width: 576px){
+    .job-misc .deadline,
+    .job-misc .company,
+    .job-misc .location{
+        display:block;
+    }
+
+    .deadline,
+    .company,
+    .location{
+        display:none;
+    }
+}
+
+
 
 @media screen and (max-width: 680px) {
 
@@ -290,9 +326,9 @@ footer a, footer a:hover {
     }
 
     .footer-links-container > div {
-        margin-right: 0!important;
-        flex-basis: 100%!important;
-        padding:0!important;
+        margin-right: 0 !important;
+        flex-basis: 100% !important;
+        padding: 0 !important;
     }
 
     .job-block {
@@ -307,10 +343,6 @@ footer a, footer a:hover {
         padding: 0;
     }
 
-    .contact, .salary, .expire {
-        display: none;
-    }
-
     .buttons {
         justify-content: space-between;
     }
@@ -319,3 +351,4 @@ footer a, footer a:hover {
 
 /**
  Single job display END*/
+

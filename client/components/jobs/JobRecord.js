@@ -141,6 +141,7 @@ export default class JobRecord extends React.Component {
 
     return (
       <div className="card">
+        {/*Job bar */}
         <div className="job-bar row card-header collapsed"
              data-target={`#${this.props.unique}`}
              role="tab" data-toggle="collapse" aria-expanded="false"
@@ -152,7 +153,7 @@ export default class JobRecord extends React.Component {
             </strong>
           </div>
 
-          <i className={'zmdi col-6 col-md-4 col-lg-1 ' + classForStarred}
+          <i className={'zmdi zmdi-hc-2x col-6 col-md-4 col-lg-1 ' + classForStarred}
              data-starred={isStarred ? 1 : 0}
              onClick={(e) => {
                this.handleStar(e);
@@ -160,11 +161,11 @@ export default class JobRecord extends React.Component {
           > </i>
 
           <div className="options col-6 col-md-4 col-lg-1 order-lg-2">
-            <div class="dropdown">
-              <a class="btn btn-primary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div className="dropdown">
+              <a className="btn btn-primary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Actions
               </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a className="dropdown-item"
                    href={details.link ? details.link : ''} onClick={(e) => {
                   this.handleApply(e);
@@ -180,7 +181,7 @@ export default class JobRecord extends React.Component {
                 >Applied
                 </a>
 
-                <div class="dropdown-divider"></div>
+                <div className="dropdown-divider"></div>
                 <a className="dropdown-item bg-danger" onClick={(e) => {
                   this.handleDelete(e);
                 }}>Delete
@@ -198,9 +199,9 @@ export default class JobRecord extends React.Component {
 
 
 
-          <i className="col-12 col-sm-4 col-lg-3 order-lg-3">
+          <div className="company col-12 col-sm-4 col-lg-3 order-lg-3">
             {details.company}
-          </i>
+          </div>
           <div className="location col-12 col-sm-4 col-lg-2 order-lg-4">
             {details.location}
           </div>
@@ -209,9 +210,38 @@ export default class JobRecord extends React.Component {
           </div>
         </div>
 
-        <div id={this.props.unique} className="collapse" role="tabpanel"
+        {/*Expanded details panel*/}
+        <div id={this.props.unique} className="collapse panel-job-detail" role="tabpanel"
              data-parent="#accordion">
-          hellllll
+          <div className="job-detail-block">
+            <div className="job-desc">
+              {details.description}
+            </div>
+
+            <div className="job-misc">
+              <div className="contact">
+                <i className="zmdi zmdi-hc-lg zmdi-account-box"> </i>
+                {details.contact ? details.contact : 'Null'}
+              </div>
+              <div className="salary">
+                <i className="zmdi zmdi-hc-lg zmdi-money"> </i>
+                {details.salary ? details.salary : 'Null'}
+              </div>
+
+              <div className="company">
+                <i className="zmdi zmdi-hc-lg zmdi-home"/>
+                  {details.company}
+              </div>
+              <div className="location">
+                <i className="zmdi zmdi-hc-lg zmdi-pin"/>
+                  {details.location}
+              </div>
+              <div className="deadline">
+                <i className="zmdi zmdi-hc-lg zmdi-calendar-close"/>
+                  {this.stringToDate(details.expire)}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
