@@ -241,7 +241,7 @@ footer a, footer a:hover {
     margin: 10px 0 0;
     border-bottom: slategrey solid 1px;
     max-height: 300px;
-    overflow: scroll;
+    overflow: auto;
     color: #6C7A89;
 }
 
