@@ -1,11 +1,11 @@
 'use strict';
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './client/index.html',
-  filename: 'index.html',
-  inject: 'body'
-});
+
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+//   template: './client/index.html',
+//   filename: 'index.html',
+//   inject: 'body'
+// });
 
 module.exports = {
   entry: './client/index.js', //entry file where the bundler starts the bundling process.
@@ -30,6 +30,6 @@ module.exports = {
   },
 
   plugins: [
-    HtmlWebpackPluginConfig,
+   // HtmlWebpackPluginConfig,
   ]
 };
