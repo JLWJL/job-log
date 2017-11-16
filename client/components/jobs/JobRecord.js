@@ -16,8 +16,6 @@ export default class JobRecord extends React.Component {
     this.handleStatusChange = this.handleStatusChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleStar = this.handleStar.bind(this);
-    this.handleDescription = this.handleDescription.bind(this);
-
   }
 
   /**
@@ -47,6 +45,7 @@ export default class JobRecord extends React.Component {
    * Alert when no link specified, otherwise default action
    * */
   handleApply (e) {
+    e.nativeEvent.stopImmediatePropagation();
     let hasHref = e.target.href !== '' && e.target.href !== e.target.baseURI;
     if (!hasHref) {
       alert('You didn\'t save a link to the job when creating this record');
@@ -60,6 +59,7 @@ export default class JobRecord extends React.Component {
    * */
   handleStatusChange (e) {
     e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
     let value = this.state.isJobApplied;
     let status = value === 0 ? '1' : '0';
     this.jobService.updateJob({'status': status}).then(
@@ -77,6 +77,7 @@ export default class JobRecord extends React.Component {
   }
 
   handleDelete () {
+    e.nativeEvent.stopImmediatePropagation();
     let confirm = window.confirm(
       'Are you sure you want to delete this record?');
     if (confirm) {
@@ -97,7 +98,7 @@ export default class JobRecord extends React.Component {
    * Toggle applicaiton as starred
    * */
   handleStar (e) {
-    e.preventDefault();
+    e.nativeEvent.stopImmediatePropagation();
     e.stopPropagation();
     let starredStatus = this.state.isStarred === 0 ? '1' : '0';
     this.jobService.updateJob({'starred': starredStatus}).then(() => {
@@ -109,24 +110,6 @@ export default class JobRecord extends React.Component {
     });
   }
 
-  /**
-   * Toggle the full height of description block
-   * between elems of description and clicked one itself
-   * */
-  handleDescription (e) {
-    let classes = e.target.classList;
-
-    if (classes.contains('full-description')) {
-      classes.remove('full-description');
-    }
-    else {
-      let descriptions = document.querySelectorAll('.description');
-      descriptions.forEach((elem, i) => {
-        elem.classList.remove('full-description');
-      });
-      e.target.classList.add('full-description');
-    }
-  }
 
   render () {
     const {details} = this.props;
@@ -153,12 +136,15 @@ export default class JobRecord extends React.Component {
             </strong>
           </div>
 
-          <i className={'zmdi zmdi-hc-2x col-6 col-md-4 col-lg-1 ' + classForStarred}
-             data-starred={isStarred ? 1 : 0}
-             onClick={(e) => {
-               this.handleStar(e);
-             }}
-          > </i>
+          <div className="col-6 col-md-4 col-lg-1">
+
+            <i className={'zmdi zmdi-hc-2x ' + classForStarred}
+               data-starred={isStarred ? 1 : 0}
+               onClick={(e) => {
+                 this.handleStar(e);
+               }}
+            > </i>
+          </div>
 
           <div className="options col-6 col-md-4 col-lg-1 order-lg-2">
             <div className="dropdown">
