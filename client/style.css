@@ -343,10 +343,6 @@ footer a, footer a:hover {
         flex-basis: 100%;
     }
 
-    .right {
-        padding: 0;
-    }
-
     .buttons {
         justify-content: space-between;
     }
