@@ -62,7 +62,7 @@ export default class JobService {
   updateJob (body) {
 
     return fetch(`${this.domain}/v1/job/${this.appId}`, {
-      'method': 'PUT',
+      'method': 'PATCH',
       'body': JSON.stringify(body),
       'headers': {
         'Content-Type': 'application/json',
