@@ -76,7 +76,7 @@ export default class JobRecord extends React.Component {
     );
   }
 
-  handleDelete () {
+  handleDelete (e) {
     e.nativeEvent.stopImmediatePropagation();
     let confirm = window.confirm(
       'Are you sure you want to delete this record?');
