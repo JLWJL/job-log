@@ -11,20 +11,19 @@ export default class AuthComponent extends React.Component {
     super(props);
     this.Auth = new AuthService();
     this.state = {
-      isLoggedIn: this.Auth.isLoggedIn(),
+      isLoggedIn: false, //this.Auth.isLoggedIn(),
+      isLoading: true,
     };
     this.setUserLogin = this.setUserLogin.bind(this);
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     //Check login
-    if (this.Auth.isLoggedIn()) {
-      this.setState({
-        isLoggedIn: true,
-        hasError: false,
-        error: '',
-        info: '',
-      });
+    let status = await this.Auth.isLoggedIn();
+    if(status){
+      this.setUserLogin(true);
+    }else{
+      this.setUserLogin(false);
     }
   }
 
@@ -39,14 +38,16 @@ export default class AuthComponent extends React.Component {
   setUserLogin (bool) {
     this.setState({
       isLoggedIn: bool,
+      isLoading: false,
     });
   }
 
   render () {
-    const {isLoggedIn, hasError, error, info} = this.state;
+    const {isLoggedIn, isLoading, hasError, error, info} = this.state;
     const authProps = {
       isAuthenticated: isLoggedIn,
       setUserLogin: this.setUserLogin,
+      isLoading: isLoading,
     };
 
     return (
@@ -63,7 +64,7 @@ export default class AuthComponent extends React.Component {
             </details>
           </div>
         ) : (
-          <Main props={authProps}/>
+          <Main authProps={authProps}/>
         )}
 
         <Footer />

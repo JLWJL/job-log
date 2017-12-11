@@ -1,33 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AuthService from '../services/AuthService';
-import { Redirect } from 'react-router-dom';
 
-export default function withAuth (Component) {
+export default function withAuth (Component, someProps) {
   return class Authen extends React.Component {
     constructor (props) {
       super(props);
-      this.state = {
-        isLoggedIn: false,
-        error: false,
-        isLoading: true,
-      };
-
       this.Auth = new AuthService();
-    }
-
-    componentDidMount () {
-      if (this.Auth.isLoggedIn()) {
-        this.setState({
-          isLoggedIn: true,
-          isLoading: false,
-        });
-      }
-      else {
-        this.setState({
-          isLoggedIn: false,
-          isLoading: false,
-        });
-      }
+      this.state = {
+        isLoggedIn: someProps.isAuthenticated,
+        error: false,
+        isLoading: someProps.isLoading,
+      };
     }
 
     render () {
@@ -35,14 +19,17 @@ export default function withAuth (Component) {
       if (state.isLoggedIn) {
         return (<Component isLoggedIn={state.isLoggedIn}/>);
       }
-      if (state.isLoading) {
+      else if (state.isLoading) {
         return <h3> Loading ...</h3>;
       }
-      if (state.error) {
-        throw state.error;
-      }
       else {
-        return <Redirect to="/login"/>;
+        return (
+          <div>
+            <h3>Please log in to manage your jobs applications</h3><br/>
+            <Link to="/login" className="btn btn-primary mr-4">Log in</Link>
+            <Link to="/signup" className="btn btn-primary">Sign up</Link>
+          </div>
+        );
       }
     }
   };
