@@ -157,6 +157,9 @@ export default class JobRecord extends React.Component {
                   this.handleApply(e);
                 }} target="new">Apply</a>
                 <Link to={`/jobs/${details.app_id}`}
+                      onClick={(e)=>{
+                        e.nativeEvent.stopImmediatePropagation();
+                      }}
                       className="dropdown-item"
                       target="new">Edit</Link>
                 <a className={'status dropdown-item ' + classForApplied}
