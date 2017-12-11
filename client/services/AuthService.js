@@ -1,8 +1,8 @@
-import jwtService from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 //import ServiceInterface from './ServiceInterface';
 
 export default class AuthService {
-  constructor (domain) {
+  constructor () {
 
     this.domain = process.env.API_URL || 'http://localhost:3000/api';
     this.signup = this.signup.bind(this);
@@ -58,9 +58,26 @@ export default class AuthService {
     );
   }
 
-  isLoggedIn () {
+  /**
+   * Check the validation status of token stored in local storage
+   * @returns {boolean}
+   */
+  async isLoggedIn () {
     //should verify later on
-    return localStorage.getItem('user');
+    if (localStorage.getItem('user')) {
+      //get token
+      let token = JSON.parse(localStorage.getItem('user')).token;
+
+      //Send token back to server for validation
+      let result = await this.fetch(`${this.domain}/v1/user/auth`, {
+        method: 'POST',
+        body: JSON.stringify({'token': token}),
+      });
+      return result;
+    }
+    else {
+      return false;
+    }
   }
 
   setUser (userObj) {
@@ -82,7 +99,23 @@ export default class AuthService {
     };
 
     let newInit = Object.assign(init, options);
-    return fetch(url, newInit).then(this.checkStatus);
+
+    /**TODO
+     * Refactor new Promise() with await
+     */
+    return new Promise((resolve, reject) => {
+      fetch(url, newInit).then(this.checkStatus).then(
+        //determin the Promise
+        (data) => {
+          resolve(data);
+        },
+        () => {
+          reject(false);
+        });
+    }) //Promise executor ends
+      .catch(err => {
+        return false;
+      });
   }
 
   checkStatus (res) {
