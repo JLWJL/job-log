@@ -12,9 +12,9 @@ import Registration from './users/Registration';
 import HelpPage from './HelpPage';
 import NotFoundPage from './NotFoundPage';
 
-export default function Main ({props}) {
-  const AuthAccount = withAuth(Account);
-  const AuthJobs = withAuth(JobsOverview);
+export default function Main ({authProps}) {
+  const AuthAccount = withAuth(Account, authProps);
+  const AuthJobs = withAuth(JobsOverview, authProps);
 
   return (
     <main className="app-content container">
@@ -33,13 +33,13 @@ export default function Main ({props}) {
         }/>
 
         <UnAuthRoute path='/signup' exact component={Registration}
-                     authProps={props}/>
-        <UnAuthRoute path='/login' exact component={Login} authProps={props}/>
+                     authProps={authProps}/>
+        <UnAuthRoute path='/login' exact component={Login} authProps={authProps}/>
 
         <Route
           path='/logout' exact render={routeProps =>
-          props.isAuthenticated ?
-            <Logout rProps={routeProps} authProps={props}/>
+          authProps.isAuthenticated ?
+            <Logout rProps={routeProps} authProps={authProps}/>
             : <Redirect to="/"/>
         }
         />
