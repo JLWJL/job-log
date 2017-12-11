@@ -9,6 +9,7 @@ export default class DisplayAllJobs extends React.Component {
     super();
     this.state = {
       jobs: [],
+      isLoading: true,
     };
     this.jobService = new JobService();
   }
@@ -17,6 +18,7 @@ export default class DisplayAllJobs extends React.Component {
     this.jobService.listJobs().then(jobData => {
       this.setState({
         jobs: jobData,
+        isLoading: false,
       });
     }).catch(err => {
       alert(err);
@@ -24,6 +26,7 @@ export default class DisplayAllJobs extends React.Component {
   }
 
   render () {
+    const {isLoading} = this.state;
     const jobsList = this.state.jobs.map((job, i) => {
       return (
         <JobRecord key={i + 1} unique={i + 1} details={job}
@@ -31,11 +34,19 @@ export default class DisplayAllJobs extends React.Component {
       );
     });
 
-    return (
-      <div className="jobs" id="accordion" role="tablist">
-        {jobsList}
-        <Link to="/jobs/new-job" className="btn btn-primary">New Job</Link>
-      </div>
-    );
+
+    if(isLoading){
+      return(
+        <h3> Preparing data ...</h3>
+      )
+    }
+    else{
+      return (
+        <div className="jobs" id="accordion" role="tablist">
+          {jobsList.length > 0 ? jobsList : <h2>No job applications</h2>}
+          <Link to="/jobs/new-job" className="btn btn-primary">New Job</Link>
+        </div>
+      );
+    }
   }
 }
