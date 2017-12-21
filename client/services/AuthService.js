@@ -1,5 +1,4 @@
-import jwt from 'jsonwebtoken';
-//import ServiceInterface from './ServiceInterface';
+import 'regenerator-runtime/runtime';
 
 export default class AuthService {
   constructor () {

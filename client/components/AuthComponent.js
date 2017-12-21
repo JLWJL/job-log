@@ -1,4 +1,5 @@
 import React from 'react';
+import 'regenerator-runtime/runtime';
 
 import AuthService from '../services/AuthService';
 
