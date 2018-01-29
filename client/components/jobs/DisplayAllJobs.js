@@ -5,7 +5,7 @@ import JobRecord from './JobRecord';
 
 export default class DisplayAllJobs extends React.Component {
 
-  constructor () {
+  constructor() {
     super();
     this.state = {
       jobs: [],
@@ -14,33 +14,37 @@ export default class DisplayAllJobs extends React.Component {
     this.jobService = new JobService();
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.jobService.listJobs().then(jobData => {
       this.setState({
         jobs: jobData,
         isLoading: false,
       });
     }).catch(err => {
+      this.setState({
+        isLoading: false
+      })
       alert(err);
+      this.props.history.push('/');
     });
   }
 
-  render () {
-    const {isLoading} = this.state;
+  render() {
+    const { isLoading } = this.state;
     const jobsList = this.state.jobs.map((job, i) => {
       return (
         <JobRecord key={i + 1} unique={i + 1} details={job}
-                   routeProps={this.props}/>
+          routeProps={this.props} />
       );
     });
 
 
-    if(isLoading){
-      return(
+    if (isLoading) {
+      return (
         <h3> Preparing data ...</h3>
       )
     }
-    else{
+    else {
       return (
         <div className="jobs" id="accordion" role="tablist">
           {jobsList.length > 0 ? jobsList : <h2>No job applications</h2>}
