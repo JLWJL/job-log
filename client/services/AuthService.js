@@ -1,7 +1,7 @@
 import 'regenerator-runtime/runtime';
 
 export default class AuthService {
-  constructor () {
+  constructor() {
 
     this.domain = process.env.API_URL || 'http://localhost:3000/api';
     this.signup = this.signup.bind(this);
@@ -17,7 +17,7 @@ export default class AuthService {
   /**
    * Collect form data and convert to json format
    */
-  getFormData (formElement) {
+  getFormData(formElement) {
     let formData = new FormData(formElement);
 
     let jsonFormData = {};
@@ -27,14 +27,14 @@ export default class AuthService {
     return JSON.stringify(jsonFormData);
   }
 
-  signup (formdata) {
+  signup(formdata) {
     return this.fetch(`${this.domain}/v1/user/auth/signup`, {
       'method': 'POST',
       'body': formdata,
     });
   }
 
-  login (credential) {
+  login(credential) {
     return this.fetch(`${this.domain}/v1/user/auth/login`, {
       method: 'POST',
       body: credential,
@@ -42,10 +42,13 @@ export default class AuthService {
       res => {
         this.setUser(res);
       },
-    );
+    )
+      .catch(err => {
+        return false;
+      });
   }
 
-  logout () {
+  logout() {
     return this.fetch(`${this.domain}/v1/user/auth/logout`, {
       method: 'POST',
       body: null,
@@ -61,39 +64,45 @@ export default class AuthService {
    * Check the validation status of token stored in local storage
    * @returns {boolean}
    */
-  async isLoggedIn () {
-    //should verify later on
+  async isLoggedIn() {
     if (localStorage.getItem('user')) {
-      //get token
-      let token = JSON.parse(localStorage.getItem('user')).token;
-
-      //Send token back to server for validation
-      let result = await this.fetch(`${this.domain}/v1/user/auth`, {
-        method: 'POST',
-        body: JSON.stringify({'token': token}),
-      });
-      return result;
+      //get user and token
+      let user = this.getUser();
+      if (user && user.token) {
+        //Send token back to server for validation
+        let result = await this.fetch(`${this.domain}/v1/user/auth`, {
+          method: 'GET'
+        });
+        return result;
+      }
+      else {
+        return false;
+      }
     }
     else {
       return false;
     }
   }
 
-  setUser (userObj) {
+  setUser(userObj) {
     localStorage.setItem('user', JSON.stringify(userObj));
   }
 
-  getUser () {
-    return JSON.parse(localStorage.getItem('user'));
+  getUser() {
+    try {
+      return JSON.parse(localStorage.getItem('user'));
+    } catch (error) {
+      return false;
+    }
   }
 
-  fetch (url, options) {
+  fetch(url, options) {
 
     let init = {
       'headers': {
         'Content-Type': 'application/json',
         'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-        'X-Authentication': this.getUser() || '',
+        'X-Authentication': this.getUser() ? this.getUser().token : '',
       },
     };
 
@@ -112,12 +121,12 @@ export default class AuthService {
           reject(false);
         });
     }) //Promise executor ends
-      .catch(err => {
-        return false;
-      });
+    // .catch(err => {
+    //   return false;
+    // });
   }
 
-  checkStatus (res) {
+  checkStatus(res) {
     if (res.ok) {
       return res.json();
     }
