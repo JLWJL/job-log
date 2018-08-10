@@ -30,8 +30,8 @@
   "scripts": {
     "postinstall": "webpack -p --config webpack.config.prod.js --progress --colors",
     "start": "nodemon client_server.js",
-    "build:dev": "webpack --config webpack.config.dev.js --watch",
-    "babel": "babel app.js -d dist/svr && babel ./client/components/App.js -d dist/svr "
+    "build:dev": "webpack --config webpack.config.dev.js",
+    "babel": "babel client_server.js -d dist/svr && babel ./client/components/App.js -d dist/svr "
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
