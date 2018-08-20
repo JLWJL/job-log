@@ -1,7 +1,7 @@
 /node_modules
 *.log
 /dist
-yarn.lock
+#yarn.lock
 /.idea
 .env
 Procfile
