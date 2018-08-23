@@ -1,6 +1,8 @@
+import * as apiUrl from '../config.js'
+
 export default class JobService {
   constructor (appId) {
-    this.domain = process.env.API_URL || 'http://localhost:3000/api';
+    this.domain = process.env.API_URL || apiUrl.LOCAL;
     if (appId !== null) {
       this.appId = appId;
     }
