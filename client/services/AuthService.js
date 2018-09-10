@@ -42,10 +42,10 @@ export default class AuthService {
       res => {
         this.setUser(res);
       },
+      rej => {
+        throw new Error('Invalid credential');
+      }
     )
-      .catch(err => {
-        return false;
-      });
   }
 
   logout() {
@@ -117,7 +117,7 @@ export default class AuthService {
         (data) => {
           resolve(data);
         },
-        () => {
+        (err) => {
           reject(false);
         });
     }) //Promise executor ends

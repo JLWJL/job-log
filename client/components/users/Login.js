@@ -43,7 +43,7 @@ export default class Login extends React.Component {
     ).catch(
       err => {
         // alert("Please check your email and password")
-        alert(`Login Error: ${err}`);
+        alert(`Login Error: ${err.message}`);
       },
     );
   }
